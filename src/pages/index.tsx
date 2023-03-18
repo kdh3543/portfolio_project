@@ -1,1 +1,1 @@
-export { default } from "../components/elements/Login";
+export { default } from '../components/elements/LoginPage'
