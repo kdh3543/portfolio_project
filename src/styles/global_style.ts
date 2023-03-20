@@ -1,8 +1,6 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
-
-
 * {
   box-sizing: border-box;
   padding: 0;
@@ -17,7 +15,6 @@ body {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
   background-color:black;
 }
 
@@ -32,4 +29,4 @@ a {
   }
 }
 
-`
+`;
