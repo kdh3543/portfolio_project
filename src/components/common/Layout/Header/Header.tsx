@@ -6,7 +6,6 @@ import { NAV_DATA } from "./_fragments/header.data";
 const Navbar = styled.div`
   width: 100%;
   height: 50px;
-  border: 1px solid green;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -14,6 +13,11 @@ const Navbar = styled.div`
     font-weight: bold;
     color: white;
   }
+  position: fixed;
+  top: 0;
+  background-color: black;
+  z-index: 3;
+  opacity: 85%;
 `;
 
 const MenuBox = styled.div`
@@ -44,10 +48,6 @@ const Menus = styled.button`
   font-family: Inter;
   cursor: pointer;
   margin-left: 20px;
-  &: active {
-    transform: scale(0.98);
-    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
-  }
 `;
 
 const LogoutButton = styled.button`
@@ -57,10 +57,6 @@ const LogoutButton = styled.button`
   margin: 0px 20px;
   color: white;
   font-weight: bold;
-  &: active {
-    transform: scale(0.98);
-    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
-  }
 `;
 
 export default function Header() {

@@ -26,10 +26,6 @@ const SearchButton = styled.button`
   color: white;
   cursor: pointer;
   padding: 5px;
-  &:active {
-    transform: scale(0.98);
-    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
-  }
 `;
 
 const Search = styled.input`
