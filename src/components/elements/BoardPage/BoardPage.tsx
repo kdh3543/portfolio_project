@@ -2,29 +2,7 @@ import { Footer } from "@/components/common/Layout/Footer/Footer";
 import Header from "@/components/common/Layout/Header/Header";
 import Head from "next/head";
 import styled from "styled-components";
-
-const Container = styled.div`
-  min-height: 600px;
-  width: 100%;
-`;
-
-const Title = styled.div`
-  color: white;
-  width: 100%;
-  text-align: center;
-  margin-top: 60px;
-  font-weight: bold;
-  font-size: 30px;
-  position: relative;
-`;
-
-const Content = styled.div`
-  width: 80%;
-  margin: auto;
-  margin-top: 20px;
-  min-height: 500px;
-  border: 1px solid white;
-`;
+import BoardContent from "./_fragments/BoardContent";
 
 function BoardPage() {
   return (
@@ -36,10 +14,7 @@ function BoardPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <Container>
-        <Title>{"게시판"}</Title>
-        <Content></Content>
-      </Container>
+      <BoardContent />
       {/* <MovieLayout movies={movies} /> */}
       <Footer />
     </>
