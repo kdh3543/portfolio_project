@@ -50,8 +50,12 @@ const Image = styled.img`
   width: 100%;
   height: 100%;
   border-radius: 15px;
-  box-shadow: 5px 5px 5px 3px #80808050;
+  // box-shadow: 5px 5px 5px 3px #80808050;
+  box-shadow: 8px 5px 22px 10px #80808050;
   cursor: pointer;
+  &:hover {
+    transform: scale(0.98);
+  }
 `;
 
 const Detail = styled.div`

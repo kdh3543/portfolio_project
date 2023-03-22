@@ -1,10 +1,16 @@
 import { Footer } from "@/components/common/Layout/Footer/Footer";
 import Header from "@/components/common/Layout/Header/Header";
 import Head from "next/head";
-import styled from "styled-components";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import Main from "./_fragments/Main";
 
-function BoardPage() {
+function BoardInfor() {
+  const router = useRouter();
+  const { id } = router.query;
+  useEffect(() => {
+    console.log(id);
+  }, [id]);
   return (
     <>
       <Head>
@@ -14,10 +20,11 @@ function BoardPage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <Main />
+      <Main id={id} />
+      {/* <MovieLayout movies={movies} /> */}
       <Footer />
     </>
   );
 }
 
-export default BoardPage;
+export default BoardInfor;

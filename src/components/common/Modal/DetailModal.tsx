@@ -62,6 +62,8 @@ const Content = styled.div`
 `;
 
 const Image = styled.img`
+  box-shadow: 8px 5px 22px 10px rgba(0, 0, 0, 0.24);
+  border-radius: 10px;
   width: 50%;
 `;
 
@@ -80,6 +82,7 @@ const ReserveButton = styled.button`
   width: 100%;
   cursor: pointer;
   font-weight: bold;
+  border-radius: 10px;
 `;
 
 function DetailModal() {
