@@ -1,8 +1,6 @@
 import { Footer } from "@/components/common/Layout/Footer/Footer";
 import Header from "@/components/common/Layout/Header/Header";
 import Head from "next/head";
-
-import { useState } from "react";
 import MovieLayout from "@/components/common/Layout/MovieLayout/MovieLayout";
 import DetailModal from "@/components/common/Modal/DetailModal";
 import { MoviesProps } from "@/components/common/Layout/MovieLayout/_fragments/Movie.data";
