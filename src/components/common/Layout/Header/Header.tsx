@@ -1,6 +1,8 @@
 import { MY_IMAGE } from "@/generated/path/images";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import styled from "styled-components";
+import Drawer from "./_fragments/Drawer";
 import { NAV_DATA } from "./_fragments/header.data";
 
 const Navbar = styled.div`
@@ -16,7 +18,6 @@ const Navbar = styled.div`
   position: fixed;
   top: 0;
   background-color: black;
-  z-index: 3;
   opacity: 85%;
 `;
 
@@ -60,25 +61,40 @@ const LogoutButton = styled.button`
 `;
 
 export default function Header() {
+  const [drawerState, setDrawerState] = useState(false);
   const router = useRouter();
+
+  const openDrawer = () => {
+    setDrawerState(true);
+  };
+
+  const changeState = () => {
+    setDrawerState(false);
+  };
   return (
-    <Navbar>
-      <MenuBox>
-        <Logo onClick={() => router.push("/mainpage")}>
-          <img src={MY_IMAGE.LOGO} alt="" />
-        </Logo>
-        {NAV_DATA.map((item) => {
-          return (
-            <Menus key={item.id} onClick={() => router.push(item.path)}>
-              {item.name}{" "}
-            </Menus>
-          );
-        })}
-      </MenuBox>
-      <MemberBox>
-        {"ID님 환영합니다"}
-        <LogoutButton onClick={() => router.push("/")}>LOGOUT</LogoutButton>
-      </MemberBox>
-    </Navbar>
+    <>
+      <>
+        <Drawer isOpen={drawerState} changeState={changeState} />
+        <Navbar>
+          <MenuBox>
+            <Logo onClick={() => router.push("/mainpage")}>
+              <img src={MY_IMAGE.LOGO} alt="" />
+            </Logo>
+            {NAV_DATA.map((item) => {
+              return (
+                <Menus key={item.id} onClick={() => router.push(item.path)}>
+                  {item.name}{" "}
+                </Menus>
+              );
+            })}
+            <button onClick={openDrawer}>Drawer button</button>
+          </MenuBox>
+          <MemberBox>
+            {"ID님 환영합니다"}
+            <LogoutButton onClick={() => router.push("/")}>LOGOUT</LogoutButton>
+          </MemberBox>
+        </Navbar>
+      </>
+    </>
   );
 }

@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Main from "./_fragments/Main";
 
-function BoardInfor() {
+function BoardDetail() {
   const router = useRouter();
   const { id } = router.query;
   useEffect(() => {
@@ -21,10 +21,9 @@ function BoardInfor() {
       </Head>
       <Header />
       <Main id={id} />
-      {/* <MovieLayout movies={movies} /> */}
       <Footer />
     </>
   );
 }
 
-export default BoardInfor;
+export default BoardDetail;

@@ -1,6 +1,10 @@
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
+export interface TextType {
+  disable: boolean;
+}
+
 const Container = styled.div`
   min-height: 800px;
   width: 100%;
@@ -13,6 +17,9 @@ const Box = styled.div`
   margin-top: 40px;
   & > * {
     color: white;
+  }
+  @media screen and (max-width: 1024px) {
+    width: 90%;
   }
 `;
 
@@ -30,21 +37,8 @@ const Title = styled.div`
   font-weight: bold;
   align-items: center;
 `;
-const IdBox = styled.div`
-  width: 20%;
-  display: flex;
-  align-items: center;
-  color: white;
-  & > * {
-    width: 50%;
-  }
-  & > div:nth-child(2) {
-    font-size: 20px;
-    text-align: center;
-  }
-`;
 const TitleBox = styled.div`
-  width: 80%;
+  width: 100%;
   display: flex;
   align-items: center;
   & > div:first-child {
@@ -58,7 +52,8 @@ const TitleBox = styled.div`
     border-radius: 10px;
     height: 30px;
     padding-left: 10px;
-    color: #ffffff90;
+    background-color: white;
+    color: gray;
   }
 `;
 
@@ -72,7 +67,8 @@ const Content = styled.div`
     border-radius: 10px;
     padding: 10px;
     resize: none;
-    color: #ffffff90;
+    background-color: white;
+    color: gray;
   }
 `;
 
@@ -102,23 +98,19 @@ function Main({ id }: any) {
   return (
     <>
       <Container>
-        <Header>{"게시판 상세 내용"}</Header>
+        <Header>{"게시판 작성"}</Header>
         <Box>
           <Title>
-            <IdBox>
-              <div>{"게시판 ID"}</div>
-              <div>{id}</div>
-            </IdBox>
             <TitleBox>
               <div>{"제목"}</div>
-              <input disabled type={"text"} placeholder={"placeholder"} />
+              <input type={"text"} placeholder={"제목을 입력해주세요"} />
             </TitleBox>
           </Title>
           <Content>
-            <textarea disabled value={"tete"} name="" id=""></textarea>
+            <textarea placeholder={"내용을 입력해주세요"} name="" id="" />
           </Content>
           <ButtonBox>
-            <button>{"수정"}</button>
+            <button>{"등록"}</button>
             <button onClick={goBoard}>{"이전"}</button>
           </ButtonBox>
         </Box>

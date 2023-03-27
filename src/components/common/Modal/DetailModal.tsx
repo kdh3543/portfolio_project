@@ -4,6 +4,7 @@ import modalSlice from "@/feature/modal/modalSlice";
 import { useRecoilState } from "recoil";
 import { detailState, modalState } from "@/feature/state";
 import { CONFIG } from "../../../../config";
+import { useEffect } from "react";
 
 const Modal = styled.div`
   width: 100%;
@@ -25,6 +26,14 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+  border-radius: 15px;
+
+  @media screen and (min-width: 768px) and(max-width: 1024px) {
+    width: 50%;
+  }
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
 `;
 
 const Box = styled.div`
@@ -59,12 +68,26 @@ const Content = styled.div`
   margin: 50px 0px;
   font-size: 14px;
   color: gray;
+  @media screen and (max-width: 1024px) {
+    display: block;
+    text-align: center;
+    margin: 20px 0px;
+  }
 `;
 
 const Image = styled.img`
   box-shadow: 8px 5px 22px 10px rgba(0, 0, 0, 0.24);
   border-radius: 10px;
-  width: 50%;
+  width: 40%;
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    width: 60%;
+    height: 300px;
+    margin: auto;
+  }
+  @media screen and (max-width: 767px) {
+    width: 70%;
+    height: 300px;
+  }
 `;
 
 const Description = styled.div`
@@ -72,6 +95,13 @@ const Description = styled.div`
   display: flex;
   align-items: center;
   line-height: 20px;
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+    height: 50%;
+    text-align: center;
+    overflow-y: auto;
+    margin: 20px auto;
+  }
 `;
 
 const ReserveButton = styled.button`
@@ -91,11 +121,22 @@ function DetailModal() {
   const closeModal = () => {
     setModal(false);
   };
+
+  useEffect(() => {
+    if (window)
+      window.addEventListener("click", (event: MouseEvent) => {
+        const target = event.target as HTMLElement;
+        if (target.querySelector("#modal")?.id === "modal") {
+          setModal(false);
+        }
+      });
+  }, []);
+
   return (
     <>
       {modal && (
         <Modal>
-          <Container>
+          <Container id="modal">
             <CloseButton onClick={closeModal}>{"X"}</CloseButton>
             <Box>
               <Title>
@@ -107,6 +148,7 @@ function DetailModal() {
                 <Image src={`${CONFIG.API_IMAGE}/${details.poster_path}`} />
                 <Description>
                   {details.overview ? details.overview : "영화 정보 없음"}
+                  {/* testetststestetesttestetststestetesttestetststestetesttestetststestetesttestetststestetesttestetststestetesttestetststestetesttestetststestetesttestetststestetesttestetststestetest */}
                 </Description>
               </Content>
               <ReserveButton>{"예매하기"}</ReserveButton>

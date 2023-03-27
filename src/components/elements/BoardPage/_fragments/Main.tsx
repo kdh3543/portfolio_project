@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { BOARD_HEAD_DATA, BOARD_MAIN_DATA } from "./Board.data";
+import { BOARD_HEAD_DATA } from "./Board.data";
 
 export interface SubType {
   width: string;
@@ -9,7 +8,11 @@ export interface SubType {
 
 const Container = styled.div`
   min-height: 800px;
-  width: 100%;
+  width: 80%;
+  margin: auto;
+  @media screen and (max-width: 1024px) {
+    width: 100%;
+  }
 `;
 
 const MainTitle = styled.div`
@@ -22,13 +25,30 @@ const MainTitle = styled.div`
   position: relative;
 `;
 
+const RegistButton = styled.button`
+  width: 80px;
+  padding: 3px;
+  background-color: white;
+  position: absolute;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+  right: 0;
+  bottom: 0;
+  border: none;
+  border-radius: 5px;
+`;
+
 const BoardBox = styled.div`
-  width: 80%;
+  width: 100%;
   margin: 40px auto;
   background-color: white;
   border-radius: 10px;
   min-height: 500px;
   border: 1px solid white;
+  @media screen and (max-width: 1024px) {
+    border-radius: 0;
+  }
 `;
 
 const Header = styled.div`
@@ -82,11 +102,18 @@ function Main() {
 
   const toBoardInfor = (id: number) => {
     console.log(id);
-    router.push(`/board/${id}`);
+    router.push(`/board/detail/${id}`);
+  };
+
+  const toRegister = () => {
+    router.push("/board/register");
   };
   return (
     <Container>
-      <MainTitle>{"게시판"}</MainTitle>
+      <MainTitle>
+        {"게시판"}
+        <RegistButton onClick={toRegister}>{"등록"}</RegistButton>{" "}
+      </MainTitle>
       <BoardBox>
         <Header>
           {BOARD_HEAD_DATA.map((item) => (
