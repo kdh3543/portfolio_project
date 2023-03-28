@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import styled from "styled-components";
+import { Auth } from "aws-amplify";
 
 const Main = styled.div`
   height: 100vh;
@@ -11,7 +12,7 @@ const Main = styled.div`
   align-items: center;
 `;
 
-const Container = styled.form`
+const Container = styled.div`
   width: 600px;
   height: 600px;
   display: flex;
@@ -83,28 +84,53 @@ const ButtonDiv = styled.div`
   }
 `;
 
+const Error = styled.div`
+  margin-top: 10px;
+  width: 100%;
+  text-align: center;
+  color: red;
+  font-size: 13px;
+`;
+
 function SignUp() {
   const [memberData, setMemberData] = useState({
     loginID: "",
     loginPW: "",
-    sameLoginPW: "",
+    reEnterPW: "",
   });
-
+  const [idErrorState, setIdErrorState] = useState(false);
+  const [pwErrorState, setPwErrorState] = useState(false);
+  const [token, setToken] = useState("");
   const router = useRouter();
-  const goBack = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    router.push("/");
-  };
 
-  const onSignUp = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
+  const idRegex = /^[a-z]+[a-z0-9]{5,13}$/;
+  const pwRegex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{5,16}$/;
+
+  const onSignUp = async () => {
+    if (!idRegex.test(memberData.loginID)) {
+      setIdErrorState(true);
+      setPwErrorState(false);
+      return;
+    } else if (
+      !pwRegex.test(memberData.loginPW) ||
+      memberData.loginPW !== memberData.reEnterPW
+    ) {
+      setIdErrorState(false);
+      setPwErrorState(true);
+      return;
+    }
+
+    setPwErrorState(false);
+    setIdErrorState(false);
+
+    const user = await Auth.signUp(memberData.loginID, memberData.loginPW);
+    console.log(user);
     console.log(memberData);
   };
 
   const inputSignData = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setMemberData((prev) => ({ ...prev, [name]: value }));
-    console.log({ [name]: value });
   };
   return (
     <>
@@ -127,7 +153,8 @@ function SignUp() {
                 onChange={(e) => inputSignData(e)}
                 name="loginID"
                 required
-                placeholder="아이디를 입력해주세요."
+                placeholder="아이디(영문자로 시작/소문자,숫자 혼합 6 ~ 14자)"
+                maxLength={14}
               />
             </InputBox>
             <InputBox>
@@ -136,23 +163,31 @@ function SignUp() {
                 name="loginPW"
                 required
                 type={"password"}
-                placeholder="비밀번호를 입력해주세요."
+                placeholder="비밀번호(소문자,숫자 혼합 6 ~ 17자)"
                 onChange={(e) => inputSignData(e)}
+                maxLength={17}
               />
             </InputBox>
             <InputBox>
               <InputTitle>{"비밀번호확인: "}</InputTitle>
               <InputText
-                name="sameLoginPW"
+                name="reEnterPW"
                 required
                 type={"password"}
                 placeholder="비밀번호를 한번 더 입력해주세요."
                 onChange={(e) => inputSignData(e)}
+                maxLength={17}
               />
             </InputBox>
+            {idErrorState && <Error>{"아이디를 제대로 입력해주세요"}</Error>}
+            {pwErrorState && (
+              <Error>
+                {"비밀번호를 제대로 입력하거나 일치하는지 확인하세요"}
+              </Error>
+            )}
             <ButtonDiv>
-              <button onClick={(e) => onSignUp(e)}>{"회원가입"}</button>
-              <button onClick={(e) => goBack(e)}>{"뒤로"}</button>
+              <button onClick={onSignUp}>{"회원가입"}</button>
+              <button onClick={() => router.push("/")}>{"뒤로"}</button>
             </ButtonDiv>
           </LoginBox>
         </Container>
