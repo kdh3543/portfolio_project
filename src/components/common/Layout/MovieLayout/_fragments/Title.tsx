@@ -17,6 +17,9 @@ const SearchBox = styled.div`
   bottom: 0;
   font-size: 15px;
   line-height: 30px;
+  @media screen and (max-width: 768px) {
+    bottom: -40px;
+  }
 `;
 
 const SearchButton = styled.button`

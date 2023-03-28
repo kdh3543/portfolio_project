@@ -4,5 +4,6 @@ export const MY_IMAGE = {
   GITHUB: "/images/github.png",
   INSTAGRAM: "/images/instagram.png",
   DRAWER: "/images/drawer_icon.png",
-  CLOSE: "/images/close_icon.png",
+  CLOSE_WHITE: "/images/close_white_icon.png",
+  CLOSE_BLACK: "/images/close_black_icon.png",
 };

@@ -5,6 +5,7 @@ import { useRecoilState } from "recoil";
 import { detailState, modalState } from "@/feature/state";
 import { CONFIG } from "../../../../config";
 import { useEffect } from "react";
+import { MY_IMAGE } from "@/generated/path/images";
 
 const Modal = styled.div`
   width: 100%;
@@ -51,14 +52,17 @@ const Title = styled.div`
   }
 `;
 
-const CloseButton = styled.button`
+const CloseButton = styled.img`
   position: absolute;
-  font-size: 20px;
   top: 15px;
   right: 20px;
+  width: 30px;
   border: none;
   background: none;
   cursor: pointer;
+  &: active {
+    transform: scale(0.9);
+  }
 `;
 
 const Content = styled.div`
@@ -137,7 +141,8 @@ function DetailModal() {
       {modal && (
         <Modal>
           <Container id="modal">
-            <CloseButton onClick={closeModal}>{"X"}</CloseButton>
+            <CloseButton src={MY_IMAGE.CLOSE_BLACK} onClick={closeModal} />
+
             <Box>
               <Title>
                 {"영화 상세 정보"}

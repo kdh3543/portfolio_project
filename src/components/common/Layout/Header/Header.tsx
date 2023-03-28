@@ -1,6 +1,6 @@
 import { MY_IMAGE } from "@/generated/path/images";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Drawer from "./_fragments/Drawer";
 import { NAV_DATA } from "./_fragments/header.data";
@@ -26,7 +26,7 @@ const MenuBox = styled.div`
   align-items: center;
   font-weight: bold;
   margin-left: 10px;
-  pointer: cursor;
+  cursor: pointer;
 `;
 
 const MemberBox = styled.div`
@@ -60,8 +60,25 @@ const LogoutButton = styled.button`
   font-weight: bold;
 `;
 
+const DrawerDiv = styled.div`
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  margin-left: 10px;
+  > img {
+    width: 60%;
+    cursor: pointer;
+  }
+  >img: active {
+    transform: scale(0.98);
+    box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+  }
+`;
+
 export default function Header() {
+  const isWindow = typeof window === "object";
   const [drawerState, setDrawerState] = useState(false);
+  const [minSize, setMinSize] = useState(false);
   const router = useRouter();
 
   const openDrawer = () => {
@@ -71,24 +88,46 @@ export default function Header() {
   const changeState = () => {
     setDrawerState(false);
   };
+
+  useEffect(() => {
+    if (!isWindow) return;
+    if (window.innerWidth < 768) {
+      setMinSize(true);
+    } else {
+      setMinSize(false);
+    }
+    window.addEventListener("resize", () => {
+      if (window.innerWidth < 768) {
+        setMinSize(true);
+      } else {
+        setMinSize(false);
+      }
+    });
+  }, []);
   return (
     <>
       <>
         <Drawer isOpen={drawerState} changeState={changeState} />
         <Navbar>
-          <MenuBox>
-            <Logo onClick={() => router.push("/mainpage")}>
-              <img src={MY_IMAGE.LOGO} alt="" />
-            </Logo>
-            {NAV_DATA.map((item) => {
-              return (
-                <Menus key={item.id} onClick={() => router.push(item.path)}>
-                  {item.name}{" "}
-                </Menus>
-              );
-            })}
-            <button onClick={openDrawer}>Drawer button</button>
-          </MenuBox>
+          {minSize ? (
+            <DrawerDiv>
+              <img onClick={openDrawer} src={MY_IMAGE.DRAWER} alt="" />
+            </DrawerDiv>
+          ) : (
+            <MenuBox>
+              <Logo onClick={() => router.push("/mainpage")}>
+                <img src={MY_IMAGE.LOGO} alt="" />
+              </Logo>
+              {NAV_DATA.map((item) => {
+                return (
+                  <Menus key={item.id} onClick={() => router.push(item.path)}>
+                    {item.name}{" "}
+                  </Menus>
+                );
+              })}
+            </MenuBox>
+          )}
+
           <MemberBox>
             {"ID님 환영합니다"}
             <LogoutButton onClick={() => router.push("/")}>LOGOUT</LogoutButton>
