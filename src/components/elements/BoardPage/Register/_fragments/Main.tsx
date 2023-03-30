@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { API } from "aws-amplify";
 import useGraphQL from "@/components/hooks/useGraphQL/useGraphQL";
+import useCognitoUser from "@/components/hooks/useCognitoUser";
+import { useRecoilState } from "recoil";
+import { userEmailValue } from "@/feature/state";
 
 export interface TextType {
   disable: boolean;
@@ -109,8 +112,10 @@ function Main({ indexNum }: IndexType) {
     content: "",
     views: 0,
     index: 0,
+    email: "",
   });
   const [errorState, setErrorState] = useState(false);
+  const [userEmail, setUserEmail] = useRecoilState(userEmailValue);
 
   const router = useRouter();
   const goBoard = () => {
@@ -120,7 +125,12 @@ function Main({ indexNum }: IndexType) {
   const inputData = (e: any) => {
     const { value, name } = e.target;
 
-    setRegisterData((prev) => ({ ...prev, [name]: value, index: indexNum }));
+    setRegisterData((prev) => ({
+      ...prev,
+      [name]: value,
+      index: indexNum,
+      email: userEmail,
+    }));
   };
 
   const register = () => {

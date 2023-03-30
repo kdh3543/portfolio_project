@@ -12,6 +12,7 @@ export const createBoard = /* GraphQL */ `
       index
       title
       content
+      userEmail
       views
       createdAt
       updatedAt
@@ -28,6 +29,7 @@ export const updateBoard = /* GraphQL */ `
       index
       title
       content
+      userEmail
       views
       createdAt
       updatedAt
@@ -44,6 +46,7 @@ export const deleteBoard = /* GraphQL */ `
       index
       title
       content
+      userEmail
       views
       createdAt
       updatedAt

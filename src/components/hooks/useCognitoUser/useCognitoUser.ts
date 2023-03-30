@@ -23,6 +23,7 @@ function useCognitoUser() {
 
   const getCurrentUser = () => {
     const currentUser: newCognitoUser | null = userPool.getCurrentUser();
+    console.log(userPool);
     return currentUser;
   };
 

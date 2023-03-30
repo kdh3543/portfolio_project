@@ -16,3 +16,8 @@ export const detailState = atom({
   key: "detailState",
   default: data,
 });
+
+export const userEmailValue = atom({
+  key: "emailValue",
+  default: "",
+});

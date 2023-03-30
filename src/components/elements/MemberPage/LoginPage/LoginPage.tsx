@@ -1,4 +1,5 @@
 import useCognitoUser from "@/components/hooks/useCognitoUser";
+import { userEmailValue } from "@/feature/state";
 import { MY_IMAGE } from "@/generated/path/images";
 import userPool from "@/pages/userPool";
 import {
@@ -8,6 +9,7 @@ import {
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 
 const Main = styled.div`
@@ -104,12 +106,12 @@ function LoginPage() {
   const [wrongError, setWrongError] = useState(false);
   const [tempError, setTempError] = useState(false);
   const [confirmError, setConfirmError] = useState(false);
+  const [userEmail, setUserEmail] = useRecoilState(userEmailValue);
   const router = useRouter();
   const toSignUp = () => {
     router.push("/signup");
   };
   const currentUser = userPool.getCurrentUser();
-  console.log(currentUser);
   const onLogin = () => {
     setWrongError(false);
     setConfirmError(false);
@@ -126,7 +128,7 @@ function LoginPage() {
     cognitoUser.authenticateUser(authDetails, {
       onSuccess: function (result: any) {
         console.log(result.accessToken.jwtToken);
-        setLocalStorage(result.accessToken.jwtToken);
+        setUserEmail(loginData.email);
         const currentUser = userPool.getCurrentUser();
         console.log(currentUser);
         router.push("/mainpage");

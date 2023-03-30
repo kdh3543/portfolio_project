@@ -127,13 +127,12 @@ function DetailModal() {
   };
 
   useEffect(() => {
-    if (window)
-      window.addEventListener("click", (event: MouseEvent) => {
-        const target = event.target as HTMLElement;
-        if (target.querySelector("#modal")?.id === "modal") {
-          setModal(false);
-        }
-      });
+    window.addEventListener("click", (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (target.querySelector("#modal")?.id === "modal") {
+        setModal(false);
+      }
+    });
   }, []);
 
   return (

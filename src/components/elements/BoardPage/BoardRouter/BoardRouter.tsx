@@ -1,4 +1,4 @@
-import useCognitoUser from "@/components/hooks/useCognitoUser";
+import UseCognitoUser from "@/components/hooks/useCognitoUser";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import BoardDetail from "../Detail";
@@ -8,7 +8,7 @@ function BoardRouter() {
   const router = useRouter();
   const { tab } = router.query;
   useEffect(() => {
-    const currentUser = useCognitoUser().getCurrentUser();
+    const currentUser = UseCognitoUser().getCurrentUser();
     if (!currentUser) router.push("/");
   }, []);
 

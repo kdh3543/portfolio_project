@@ -7,12 +7,12 @@ const BOARD_HEAD_DATA = [
   {
     id: 2,
     name: "제목",
-    percent: "40%",
+    percent: "30%",
   },
   {
     id: 3,
-    name: "ID",
-    percent: "20%",
+    name: "이메일",
+    percent: "30%",
   },
   {
     id: 4,
@@ -31,6 +31,7 @@ type BoardType = {
   index: number;
   title: string;
   content: string;
+  email: string;
   views: number;
   createdAt: string;
   updatedAt: string;

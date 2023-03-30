@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { BoardsProps, BoardType, BOARD_HEAD_DATA } from "./Board.data";
+import { BoardType, BOARD_HEAD_DATA } from "./Board.data";
 
 export interface SubType {
   width: string;
@@ -114,6 +114,7 @@ function Main({ lists }: any) {
   useEffect(() => {
     setBoards(lists?.data.listBoards.items);
   }, []);
+  console.log(boards);
   return (
     <Container>
       <MainTitle>
@@ -138,7 +139,7 @@ function Main({ lists }: any) {
               <div>{item.index}</div>
               <div>{item.title}</div>
               <div>{item.createdAt}</div>
-              <div>{item.id}</div>
+              <div>{item.email}</div>
               <div>{item.views}</div>
             </ContentBox>
           ))}

@@ -9,6 +9,7 @@ export const getBoard = /* GraphQL */ `
       index
       title
       content
+      userEmail
       views
       createdAt
       updatedAt
@@ -27,6 +28,7 @@ export const listBoards = /* GraphQL */ `
         index
         title
         content
+        userEmail
         views
         createdAt
         updatedAt

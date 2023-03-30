@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { NAV_DATA } from "./header.data";
+import Image from "next/image";
 
 const Background = styled.div<{ type: "open" | "close" }>`
   width: 100%;
@@ -66,9 +67,7 @@ const Menus = styled.div`
 function Drawer({ isOpen, changeState }: any) {
   const [minImg, setMinImg] = useState(false);
   const router = useRouter();
-  const isWindow = typeof window === "object";
   useEffect(() => {
-    if (!isWindow) return;
     if (window.innerWidth < 400) {
       setMinImg(true);
     } else {
@@ -87,7 +86,12 @@ function Drawer({ isOpen, changeState }: any) {
       <Container type={isOpen ? "open" : "close"}>
         <Button src={MY_IMAGE.CLOSE_WHITE} onClick={changeState} />
         <Logo>
-          <img src={minImg ? MY_IMAGE.LOGO : MY_IMAGE.LOGO_FULL_NAME} alt="" />
+          <Image
+            width={60}
+            height={60}
+            src={minImg ? MY_IMAGE.LOGO : MY_IMAGE.LOGO_FULL_NAME}
+            alt=""
+          />
         </Logo>
         <MenuBox>
           {NAV_DATA.map((item) => (

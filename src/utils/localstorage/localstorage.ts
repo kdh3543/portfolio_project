@@ -1,4 +1,4 @@
-const key = "token";
+const key = "@token";
 export const setLocalStorage = (token: string) => {
   if (typeof window === "undefined") {
     console.log("can not access without window");

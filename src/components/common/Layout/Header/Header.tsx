@@ -1,10 +1,13 @@
+import { userEmailValue } from "@/feature/state";
 import { MY_IMAGE } from "@/generated/path/images";
 import userPool from "@/pages/userPool";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import Drawer from "./_fragments/Drawer";
 import { NAV_DATA } from "./_fragments/header.data";
+import Image from "next/image";
 
 const Navbar = styled.div`
   width: 100%;
@@ -67,8 +70,9 @@ const DrawerDiv = styled.div`
   align-items: center;
   font-weight: bold;
   margin-left: 10px;
+  width: 60px;
   > img {
-    width: 60%;
+    // width: 60%;
     cursor: pointer;
   }
   >img: active {
@@ -78,9 +82,9 @@ const DrawerDiv = styled.div`
 `;
 
 export default function Header() {
-  const isWindow = typeof window === "object";
   const [drawerState, setDrawerState] = useState(false);
   const [minSize, setMinSize] = useState(false);
+  const [userEmail, setUserEmail] = useRecoilState(userEmailValue);
   const router = useRouter();
 
   const openDrawer = () => {
@@ -93,12 +97,12 @@ export default function Header() {
 
   const logout = () => {
     const currentUser = userPool.getCurrentUser();
+    setUserEmail("");
     currentUser?.signOut();
     router.push("/");
   };
 
   useEffect(() => {
-    if (!isWindow) return;
     if (window.innerWidth < 768) {
       setMinSize(true);
     } else {
@@ -119,12 +123,18 @@ export default function Header() {
         <Navbar>
           {minSize ? (
             <DrawerDiv>
-              <img onClick={openDrawer} src={MY_IMAGE.DRAWER} alt="" />
+              <Image
+                width={32}
+                height={32}
+                onClick={openDrawer}
+                src={MY_IMAGE.DRAWER}
+                alt=""
+              />
             </DrawerDiv>
           ) : (
             <MenuBox>
               <Logo onClick={() => router.push("/mainpage")}>
-                <img src={MY_IMAGE.LOGO} alt="" />
+                <Image width={40} height={32} src={MY_IMAGE.LOGO} alt="" />
               </Logo>
               {NAV_DATA.map((item) => {
                 return (
@@ -137,7 +147,7 @@ export default function Header() {
           )}
 
           <MemberBox>
-            {"ID님 환영합니다"}
+            {`${userEmail.split("@")[0]}님 환영합니다`}
             <LogoutButton onClick={logout}>LOGOUT</LogoutButton>
           </MemberBox>
         </Navbar>

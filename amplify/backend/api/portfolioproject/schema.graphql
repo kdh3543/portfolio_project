@@ -7,6 +7,7 @@ type Board @model {
   id: ID!
   title: String!
   content: String!
+  userEmail: String!
   index: Int!
   views: Int!
 }

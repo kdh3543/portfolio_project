@@ -2,6 +2,7 @@ import { Footer } from "@/components/common/Layout/Footer/Footer";
 import Header from "@/components/common/Layout/Header/Header";
 import useGraphQL from "@/components/hooks/useGraphQL";
 import { MY_IMAGE } from "@/generated/path/images";
+import { getLocalStorage } from "@/utils/localstorage/localstorage";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -17,7 +18,6 @@ function BoardRegister() {
   const [indexNum, setIndexNum] = useState(0);
   const setViewNum = async () => {
     const result: any = await useGraphQL().getPost();
-    console.log(result);
     setIndexNum(
       result?.data?.listBoards?.items.length === 0
         ? 0
@@ -27,6 +27,7 @@ function BoardRegister() {
   useEffect(() => {
     setViewNum();
   }, []);
+
   console.log(indexNum);
   return (
     <>
