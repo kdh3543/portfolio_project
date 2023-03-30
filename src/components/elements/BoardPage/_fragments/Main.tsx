@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { BOARD_HEAD_DATA } from "./Board.data";
+import { BoardsProps, BoardType, BOARD_HEAD_DATA } from "./Board.data";
 
 export interface SubType {
   width: string;
@@ -77,11 +78,11 @@ const ContentBox = styled.div`
     padding: 8px;
     // border-bottom: 1px dotted gray;
   }
-  &>div: first-child {
+  &>div: first-child,&>div: last-child  {
     width: 10%;
   }
   &>div: nth-child(2) {
-    width: 50%;
+    width: 40%;
   }
   &: hover {
     transform: scale(0.98);
@@ -96,18 +97,23 @@ const Pagination = styled.div`
   text-align: center;
 `;
 
-function Main() {
-  const router = useRouter();
-  const BoardArr = Array.from({ length: 20 }, (_, x) => x);
+function Main({ lists }: any) {
+  const [boards, setBoards] = useState<BoardType[]>([]);
 
-  const toBoardInfor = (id: number) => {
+  const router = useRouter();
+
+  const toBoardInfor = (id: string, index: number) => {
     console.log(id);
-    router.push(`/board/detail/${id}`);
+    router.push(`/board/detail/${index}`);
   };
 
   const toRegister = () => {
     router.push("/board/register");
   };
+
+  useEffect(() => {
+    setBoards(lists?.data.listBoards.items);
+  }, []);
   return (
     <Container>
       <MainTitle>
@@ -122,14 +128,20 @@ function Main() {
             </SubTitle>
           ))}
         </Header>
-        {BoardArr.map((value, index) => (
-          <ContentBox onClick={() => toBoardInfor(index)} key={value}>
-            <div>{index + 1}</div>
-            <div>{"이건 제목이지"}</div>
-            <div>{"이건 ID"}</div>
-            <div>{"날짜지 이건"}</div>
-          </ContentBox>
-        ))}
+        {boards
+          .sort((a, b) => a.index - b.index)
+          .map((item, index) => (
+            <ContentBox
+              onClick={() => toBoardInfor(item.id, item.index)}
+              key={item.id}
+            >
+              <div>{item.index}</div>
+              <div>{item.title}</div>
+              <div>{item.createdAt}</div>
+              <div>{item.id}</div>
+              <div>{item.views}</div>
+            </ContentBox>
+          ))}
         <Pagination>1 2 3 </Pagination>
       </BoardBox>
     </Container>

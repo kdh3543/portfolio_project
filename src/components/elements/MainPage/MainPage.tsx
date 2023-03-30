@@ -11,6 +11,7 @@ import useCognitoUser from "@/components/hooks/useCognitoUser";
 
 function MainPage({ movies }: MoviesProps) {
   const router = useRouter();
+  console.log(movies);
   useEffect(() => {
     const currentUser = useCognitoUser().getCurrentUser();
     if (!currentUser) router.push("/");

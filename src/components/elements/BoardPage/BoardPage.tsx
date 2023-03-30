@@ -3,11 +3,12 @@ import Header from "@/components/common/Layout/Header/Header";
 import { MY_IMAGE } from "@/generated/path/images";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Main from "./_fragments/Main";
 import useCognitoUser from "@/components/hooks/useCognitoUser";
+import { BoardsProps } from "./_fragments/Board.data";
 
-function BoardPage() {
+function BoardPage({ lists }: any) {
   const router = useRouter();
 
   useEffect(() => {
@@ -24,7 +25,7 @@ function BoardPage() {
         <link rel="icon" href={MY_IMAGE.LOGO} />
       </Head>
       <Header />
-      <Main />
+      <Main lists={lists} />
       <Footer />
     </>
   );

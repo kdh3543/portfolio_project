@@ -1,7 +1,9 @@
 import { Footer } from "@/components/common/Layout/Footer/Footer";
 import Header from "@/components/common/Layout/Header/Header";
+import useGraphQL from "@/components/hooks/useGraphQL";
 import { MY_IMAGE } from "@/generated/path/images";
 import Head from "next/head";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Main from "./_fragments/Main";
 
@@ -12,6 +14,20 @@ const Div = styled.div`
 `;
 
 function BoardRegister() {
+  const [indexNum, setIndexNum] = useState(0);
+  const setViewNum = async () => {
+    const result: any = await useGraphQL().getPost();
+    console.log(result);
+    setIndexNum(
+      result?.data?.listBoards?.items.length === 0
+        ? 0
+        : result?.data?.listBoards?.items.length
+    );
+  };
+  useEffect(() => {
+    setViewNum();
+  }, []);
+  console.log(indexNum);
   return (
     <>
       <Head>
@@ -21,7 +37,7 @@ function BoardRegister() {
         <link rel="icon" href={MY_IMAGE.LOGO} />
       </Head>
       <Header />
-      <Main />
+      <Main indexNum={indexNum} />
       <Footer />
     </>
   );

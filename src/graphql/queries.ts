@@ -2,28 +2,32 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getMember = /* GraphQL */ `
-  query GetMember($id: ID!) {
-    getMember(id: $id) {
+export const getBoard = /* GraphQL */ `
+  query GetBoard($id: ID!) {
+    getBoard(id: $id) {
       id
-      loginID
-      loginPW
+      index
+      title
+      content
+      views
       createdAt
       updatedAt
     }
   }
 `;
-export const listMembers = /* GraphQL */ `
-  query ListMembers(
-    $filter: ModelMemberFilterInput
+export const listBoards = /* GraphQL */ `
+  query ListBoards(
+    $filter: ModelBoardFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listMembers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listBoards(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        loginID
-        loginPW
+        index
+        title
+        content
+        views
         createdAt
         updatedAt
       }

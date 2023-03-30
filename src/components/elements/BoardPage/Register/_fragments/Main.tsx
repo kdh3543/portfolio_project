@@ -1,5 +1,8 @@
 import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { API } from "aws-amplify";
+import useGraphQL from "@/components/hooks/useGraphQL/useGraphQL";
 
 export interface TextType {
   disable: boolean;
@@ -90,10 +93,44 @@ const ButtonBox = styled.div`
   }
 `;
 
-function Main({ id }: any) {
+const Error = styled.div`
+  width: 100%;
+  color: red;
+  font-size: 15px;
+`;
+
+export interface IndexType {
+  indexNum: number;
+}
+
+function Main({ indexNum }: IndexType) {
+  const [registerData, setRegisterData] = useState({
+    title: "",
+    content: "",
+    views: 0,
+    index: 0,
+  });
+  const [errorState, setErrorState] = useState(false);
+
   const router = useRouter();
   const goBoard = () => {
     router.back();
+  };
+
+  const inputData = (e: any) => {
+    const { value, name } = e.target;
+
+    setRegisterData((prev) => ({ ...prev, [name]: value, index: indexNum }));
+  };
+
+  const register = () => {
+    if (!registerData.title || !registerData.content) {
+      setErrorState(true);
+      return;
+    }
+    setErrorState(false);
+    useGraphQL().postBoard(registerData);
+    router.push("/board");
   };
   return (
     <>
@@ -103,14 +140,24 @@ function Main({ id }: any) {
           <Title>
             <TitleBox>
               <div>{"제목"}</div>
-              <input type={"text"} placeholder={"제목을 입력해주세요"} />
+              <input
+                onChange={(e) => inputData(e)}
+                type={"text"}
+                name="title"
+                placeholder={"제목을 입력해주세요"}
+              />
             </TitleBox>
           </Title>
           <Content>
-            <textarea placeholder={"내용을 입력해주세요"} name="" id="" />
+            <textarea
+              onChange={(e) => inputData(e)}
+              placeholder={"내용을 입력해주세요"}
+              name="content"
+            />
           </Content>
+          {errorState && <Error>{"제목과 내용 둘 다 입력해주세요."}</Error>}
           <ButtonBox>
-            <button>{"등록"}</button>
+            <button onClick={register}>{"등록"}</button>
             <button onClick={goBoard}>{"이전"}</button>
           </ButtonBox>
         </Box>

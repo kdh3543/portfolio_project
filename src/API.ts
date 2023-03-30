@@ -75,6 +75,59 @@ export type DeleteMemberInput = {
   id: string,
 };
 
+export type CreateBoardInput = {
+  id?: string | null,
+  index: number,
+  title: string,
+  content: string,
+  views: number,
+};
+
+export type ModelBoardConditionInput = {
+  index?: ModelIntInput | null,
+  title?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  views?: ModelIntInput | null,
+  and?: Array< ModelBoardConditionInput | null > | null,
+  or?: Array< ModelBoardConditionInput | null > | null,
+  not?: ModelBoardConditionInput | null,
+};
+
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export type Board = {
+  __typename: "Board",
+  id: string,
+  index: number,
+  title: string,
+  content: string,
+  views: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateBoardInput = {
+  id: string,
+  index?: number | null,
+  title?: string | null,
+  content?: string | null,
+  views?: number | null,
+};
+
+export type DeleteBoardInput = {
+  id: string,
+};
+
 export type ModelMemberFilterInput = {
   id?: ModelIDInput | null,
   loginID?: ModelStringInput | null,
@@ -103,6 +156,23 @@ export type ModelIDInput = {
 export type ModelMemberConnection = {
   __typename: "ModelMemberConnection",
   items:  Array<Member | null >,
+  nextToken?: string | null,
+};
+
+export type ModelBoardFilterInput = {
+  id?: ModelIDInput | null,
+  index?: ModelIntInput | null,
+  title?: ModelStringInput | null,
+  content?: ModelStringInput | null,
+  views?: ModelIntInput | null,
+  and?: Array< ModelBoardFilterInput | null > | null,
+  or?: Array< ModelBoardFilterInput | null > | null,
+  not?: ModelBoardFilterInput | null,
+};
+
+export type ModelBoardConnection = {
+  __typename: "ModelBoardConnection",
+  items:  Array<Board | null >,
   nextToken?: string | null,
 };
 
@@ -142,6 +212,28 @@ export type ModelSubscriptionStringInput = {
   beginsWith?: string | null,
   in?: Array< string | null > | null,
   notIn?: Array< string | null > | null,
+};
+
+export type ModelSubscriptionBoardFilterInput = {
+  id?: ModelSubscriptionIDInput | null,
+  index?: ModelSubscriptionIntInput | null,
+  title?: ModelSubscriptionStringInput | null,
+  content?: ModelSubscriptionStringInput | null,
+  views?: ModelSubscriptionIntInput | null,
+  and?: Array< ModelSubscriptionBoardFilterInput | null > | null,
+  or?: Array< ModelSubscriptionBoardFilterInput | null > | null,
+};
+
+export type ModelSubscriptionIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  in?: Array< number | null > | null,
+  notIn?: Array< number | null > | null,
 };
 
 export type CreateMemberMutationVariables = {
@@ -192,6 +284,60 @@ export type DeleteMemberMutation = {
   } | null,
 };
 
+export type CreateBoardMutationVariables = {
+  input: CreateBoardInput,
+  condition?: ModelBoardConditionInput | null,
+};
+
+export type CreateBoardMutation = {
+  createBoard?:  {
+    __typename: "Board",
+    id: string,
+    index: number,
+    title: string,
+    content: string,
+    views: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateBoardMutationVariables = {
+  input: UpdateBoardInput,
+  condition?: ModelBoardConditionInput | null,
+};
+
+export type UpdateBoardMutation = {
+  updateBoard?:  {
+    __typename: "Board",
+    id: string,
+    index: number,
+    title: string,
+    content: string,
+    views: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteBoardMutationVariables = {
+  input: DeleteBoardInput,
+  condition?: ModelBoardConditionInput | null,
+};
+
+export type DeleteBoardMutation = {
+  deleteBoard?:  {
+    __typename: "Board",
+    id: string,
+    index: number,
+    title: string,
+    content: string,
+    views: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetMemberQueryVariables = {
   id: string,
 };
@@ -221,6 +367,46 @@ export type ListMembersQuery = {
       id: string,
       loginID: string,
       loginPW: string,
+      createdAt: string,
+      updatedAt: string,
+    } | null >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetBoardQueryVariables = {
+  id: string,
+};
+
+export type GetBoardQuery = {
+  getBoard?:  {
+    __typename: "Board",
+    id: string,
+    index: number,
+    title: string,
+    content: string,
+    views: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListBoardsQueryVariables = {
+  filter?: ModelBoardFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListBoardsQuery = {
+  listBoards?:  {
+    __typename: "ModelBoardConnection",
+    items:  Array< {
+      __typename: "Board",
+      id: string,
+      index: number,
+      title: string,
+      content: string,
+      views: number,
       createdAt: string,
       updatedAt: string,
     } | null >,
@@ -268,6 +454,57 @@ export type OnDeleteMemberSubscription = {
     id: string,
     loginID: string,
     loginPW: string,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateBoardSubscriptionVariables = {
+  filter?: ModelSubscriptionBoardFilterInput | null,
+};
+
+export type OnCreateBoardSubscription = {
+  onCreateBoard?:  {
+    __typename: "Board",
+    id: string,
+    index: number,
+    title: string,
+    content: string,
+    views: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateBoardSubscriptionVariables = {
+  filter?: ModelSubscriptionBoardFilterInput | null,
+};
+
+export type OnUpdateBoardSubscription = {
+  onUpdateBoard?:  {
+    __typename: "Board",
+    id: string,
+    index: number,
+    title: string,
+    content: string,
+    views: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteBoardSubscriptionVariables = {
+  filter?: ModelSubscriptionBoardFilterInput | null,
+};
+
+export type OnDeleteBoardSubscription = {
+  onDeleteBoard?:  {
+    __typename: "Board",
+    id: string,
+    index: number,
+    title: string,
+    content: string,
+    views: number,
     createdAt: string,
     updatedAt: string,
   } | null,

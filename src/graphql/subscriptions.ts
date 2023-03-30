@@ -35,3 +35,42 @@ export const onDeleteMember = /* GraphQL */ `
     }
   }
 `;
+export const onCreateBoard = /* GraphQL */ `
+  subscription OnCreateBoard($filter: ModelSubscriptionBoardFilterInput) {
+    onCreateBoard(filter: $filter) {
+      id
+      index
+      title
+      content
+      views
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateBoard = /* GraphQL */ `
+  subscription OnUpdateBoard($filter: ModelSubscriptionBoardFilterInput) {
+    onUpdateBoard(filter: $filter) {
+      id
+      index
+      title
+      content
+      views
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteBoard = /* GraphQL */ `
+  subscription OnDeleteBoard($filter: ModelSubscriptionBoardFilterInput) {
+    onDeleteBoard(filter: $filter) {
+      id
+      index
+      title
+      content
+      views
+      createdAt
+      updatedAt
+    }
+  }
+`;

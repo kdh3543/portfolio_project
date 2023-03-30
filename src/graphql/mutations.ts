@@ -2,43 +2,49 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createMember = /* GraphQL */ `
-  mutation CreateMember(
-    $input: CreateMemberInput!
-    $condition: ModelMemberConditionInput
+export const createBoard = /* GraphQL */ `
+  mutation CreateBoard(
+    $input: CreateBoardInput!
+    $condition: ModelBoardConditionInput
   ) {
-    createMember(input: $input, condition: $condition) {
+    createBoard(input: $input, condition: $condition) {
       id
-      loginID
-      loginPW
+      index
+      title
+      content
+      views
       createdAt
       updatedAt
     }
   }
 `;
-export const updateMember = /* GraphQL */ `
-  mutation UpdateMember(
-    $input: UpdateMemberInput!
-    $condition: ModelMemberConditionInput
+export const updateBoard = /* GraphQL */ `
+  mutation UpdateBoard(
+    $input: UpdateBoardInput!
+    $condition: ModelBoardConditionInput
   ) {
-    updateMember(input: $input, condition: $condition) {
+    updateBoard(input: $input, condition: $condition) {
       id
-      loginID
-      loginPW
+      index
+      title
+      content
+      views
       createdAt
       updatedAt
     }
   }
 `;
-export const deleteMember = /* GraphQL */ `
-  mutation DeleteMember(
-    $input: DeleteMemberInput!
-    $condition: ModelMemberConditionInput
+export const deleteBoard = /* GraphQL */ `
+  mutation DeleteBoard(
+    $input: DeleteBoardInput!
+    $condition: ModelBoardConditionInput
   ) {
-    deleteMember(input: $input, condition: $condition) {
+    deleteBoard(input: $input, condition: $condition) {
       id
-      loginID
-      loginPW
+      index
+      title
+      content
+      views
       createdAt
       updatedAt
     }
