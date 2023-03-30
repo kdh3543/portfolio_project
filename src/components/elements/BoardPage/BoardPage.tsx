@@ -2,10 +2,19 @@ import { Footer } from "@/components/common/Layout/Footer/Footer";
 import Header from "@/components/common/Layout/Header/Header";
 import { MY_IMAGE } from "@/generated/path/images";
 import Head from "next/head";
-import styled from "styled-components";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import Main from "./_fragments/Main";
+import useCognitoUser from "@/components/hooks/useCognitoUser";
 
 function BoardPage() {
+  const router = useRouter();
+
+  useEffect(() => {
+    const currentUser = useCognitoUser().getCurrentUser();
+    if (!currentUser) router.push("/");
+  }, []);
+
   return (
     <>
       <Head>

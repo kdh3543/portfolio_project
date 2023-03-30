@@ -1,4 +1,5 @@
 import { MY_IMAGE } from "@/generated/path/images";
+import userPool from "@/pages/userPool";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -19,6 +20,7 @@ const Navbar = styled.div`
   top: 0;
   background-color: black;
   opacity: 85%;
+  z-index: 3;
 `;
 
 const MenuBox = styled.div`
@@ -89,6 +91,12 @@ export default function Header() {
     setDrawerState(false);
   };
 
+  const logout = () => {
+    const currentUser = userPool.getCurrentUser();
+    currentUser?.signOut();
+    router.push("/");
+  };
+
   useEffect(() => {
     if (!isWindow) return;
     if (window.innerWidth < 768) {
@@ -130,7 +138,7 @@ export default function Header() {
 
           <MemberBox>
             {"ID님 환영합니다"}
-            <LogoutButton onClick={() => router.push("/")}>LOGOUT</LogoutButton>
+            <LogoutButton onClick={logout}>LOGOUT</LogoutButton>
           </MemberBox>
         </Navbar>
       </>

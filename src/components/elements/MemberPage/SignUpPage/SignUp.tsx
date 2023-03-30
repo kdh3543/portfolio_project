@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Auth } from "aws-amplify";
+import userPool from "@/pages/userPool";
 
 const Main = styled.div`
   height: 100vh;
@@ -33,6 +33,14 @@ const LoginBox = styled.div`
 const LogoBox = styled.div`
   width: 100%;
   text-align: center;
+`;
+
+const Text = styled.div`
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  margin-left: 10px;
 `;
 
 const Title = styled.div`
@@ -94,41 +102,55 @@ const Error = styled.div`
 
 function SignUp() {
   const [memberData, setMemberData] = useState({
-    loginID: "",
-    loginPW: "",
-    reEnterPW: "",
+    email: "",
+    pw: "",
+    rePw: "",
   });
   const [idErrorState, setIdErrorState] = useState(false);
   const [pwErrorState, setPwErrorState] = useState(false);
-  const [token, setToken] = useState("");
+  const [notSamePw, setNotSamePw] = useState(false);
+  const [existed, setExisted] = useState(false);
   const router = useRouter();
 
-  const idRegex = /^[a-z]+[a-z0-9]{5,13}$/;
-  const pwRegex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{5,16}$/;
+  // const idRegex = /^[a-z]+[a-z0-9]{5,13}$/;
+  // const pwRegex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{5,16}$/;
 
   const onSignUp = async () => {
-    if (!idRegex.test(memberData.loginID)) {
-      setIdErrorState(true);
-      setPwErrorState(false);
-      return;
-    } else if (
-      !pwRegex.test(memberData.loginPW) ||
-      memberData.loginPW !== memberData.reEnterPW
-    ) {
-      setIdErrorState(false);
-      setPwErrorState(true);
+    console.log(memberData);
+    if (memberData.pw !== memberData.rePw) {
+      setNotSamePw(true);
       return;
     }
-
-    setPwErrorState(false);
-    setIdErrorState(false);
-
-    const user = await Auth.signUp(memberData.loginID, memberData.loginPW);
-    console.log(user);
-    console.log(memberData);
+    setNotSamePw(false);
+    userPool.signUp(memberData.email, memberData.pw, [], [], (err, data) => {
+      if (err) {
+        console.log(err.message);
+        if (err.message.includes("Password not long enough")) {
+          setIdErrorState(false);
+          setPwErrorState(true);
+          setExisted(false);
+          return;
+        } else if (err.message.includes("Username should be an email.")) {
+          setIdErrorState(true);
+          setPwErrorState(false);
+          setExisted(false);
+          return;
+        } else if (err.message.includes("email already exists")) {
+          setIdErrorState(false);
+          setPwErrorState(false);
+          setExisted(true);
+        }
+        return;
+      }
+      setPwErrorState(false);
+      setIdErrorState(false);
+      setExisted(false);
+      alert("회원가입 완료!");
+      router.push("/verify");
+    });
   };
 
-  const inputSignData = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const inputData = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setMemberData((prev) => ({ ...prev, [name]: value }));
   };
@@ -148,43 +170,43 @@ function SignUp() {
             </LogoBox>
             <Title>{"회원가입"}</Title>
             <InputBox>
-              <InputTitle>{"아이디: "}</InputTitle>
+              <InputTitle>{"이메일: "}</InputTitle>
               <InputText
-                onChange={(e) => inputSignData(e)}
-                name="loginID"
+                onChange={(e) => inputData(e)}
+                name="email"
+                type={"text"}
                 required
-                placeholder="아이디(영문자로 시작/소문자,숫자 혼합 6 ~ 14자)"
-                maxLength={14}
+                placeholder="이메일을 입력해주세요"
               />
             </InputBox>
+            <Text>{"*인증이 가능한 이메일로 입력해주세요"}</Text>
+
             <InputBox>
               <InputTitle>{"비밀번호: "}</InputTitle>
               <InputText
-                name="loginPW"
+                name="pw"
                 required
                 type={"password"}
-                placeholder="비밀번호(소문자,숫자 혼합 6 ~ 17자)"
-                onChange={(e) => inputSignData(e)}
+                placeholder="비밀번호(영어 소문자,숫자 혼합 8 ~ 17자)"
+                onChange={(e) => inputData(e)}
                 maxLength={17}
               />
             </InputBox>
             <InputBox>
               <InputTitle>{"비밀번호확인: "}</InputTitle>
               <InputText
-                name="reEnterPW"
+                name="rePw"
                 required
                 type={"password"}
                 placeholder="비밀번호를 한번 더 입력해주세요."
-                onChange={(e) => inputSignData(e)}
+                onChange={(e) => inputData(e)}
                 maxLength={17}
               />
             </InputBox>
-            {idErrorState && <Error>{"아이디를 제대로 입력해주세요"}</Error>}
-            {pwErrorState && (
-              <Error>
-                {"비밀번호를 제대로 입력하거나 일치하는지 확인하세요"}
-              </Error>
-            )}
+            {idErrorState && <Error>{"이메일을 제대로 입력해주세요"}</Error>}
+            {pwErrorState && <Error>{"비밀번호를 제대로 입력해주세요"}</Error>}
+            {notSamePw && <Error>{"비밀번호가 일치하지 않습니다"}</Error>}
+            {existed && <Error>{"이미 존재하는 계정입니다"}</Error>}
             <ButtonDiv>
               <button onClick={onSignUp}>{"회원가입"}</button>
               <button onClick={() => router.push("/")}>{"뒤로"}</button>

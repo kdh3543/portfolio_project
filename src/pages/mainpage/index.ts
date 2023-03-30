@@ -1,9 +1,16 @@
 import axios from "axios";
-import { GetServerSideProps } from "next";
 import { CONFIG } from "../../../config";
 export { default } from "../../components/elements/MainPage";
+import userPool from "@/pages/userPool";
+import { CognitoUser } from "amazon-cognito-identity-js";
 
-export const getServerSideProps: GetServerSideProps = async () => {
+// class newCognitoUser extends CognitoUser {
+//   public storage?: any;
+// }
+
+export async function getServerSideProps() {
+  // const currentUser: newCognitoUser | null = userPool.getCurrentUser();
+
   const date = new Date();
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -19,9 +26,11 @@ export const getServerSideProps: GetServerSideProps = async () => {
   );
 
   const data = result.data;
+  // console.log("??????");
+  // console.log(currentUser);
   return {
     props: {
       movies: data.results,
     },
   };
-};
+}

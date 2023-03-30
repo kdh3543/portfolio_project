@@ -11,7 +11,7 @@ const Background = styled.div<{ type: "open" | "close" }>`
   position: absolute;
   top: 0;
   visibility: ${({ type }) => (type === "open" ? "visiblity" : "hidden")};
-  z-index: 3;
+  z-index: 4;
   opacity: ${({ type }) => (type === "open" ? "1" : "0")};
   transition: all 1s linear;
 `;

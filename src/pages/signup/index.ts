@@ -1,1 +1,1 @@
-export { default } from "../../components/elements/SignUpPage";
+export { default } from "../../components/elements/MemberPage/SignUpPage";
