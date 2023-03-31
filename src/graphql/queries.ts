@@ -6,10 +6,10 @@ export const getBoard = /* GraphQL */ `
   query GetBoard($id: ID!) {
     getBoard(id: $id) {
       id
-      index
       title
       content
       userEmail
+      index
       views
       createdAt
       updatedAt
@@ -25,10 +25,10 @@ export const listBoards = /* GraphQL */ `
     listBoards(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        index
         title
         content
         userEmail
+        index
         views
         createdAt
         updatedAt

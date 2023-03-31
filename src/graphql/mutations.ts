@@ -9,10 +9,10 @@ export const createBoard = /* GraphQL */ `
   ) {
     createBoard(input: $input, condition: $condition) {
       id
-      index
       title
       content
       userEmail
+      index
       views
       createdAt
       updatedAt
@@ -26,10 +26,10 @@ export const updateBoard = /* GraphQL */ `
   ) {
     updateBoard(input: $input, condition: $condition) {
       id
-      index
       title
       content
       userEmail
+      index
       views
       createdAt
       updatedAt
@@ -43,10 +43,10 @@ export const deleteBoard = /* GraphQL */ `
   ) {
     deleteBoard(input: $input, condition: $condition) {
       id
-      index
       title
       content
       userEmail
+      index
       views
       createdAt
       updatedAt
