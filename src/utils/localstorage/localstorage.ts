@@ -1,10 +1,10 @@
-const key = "@token";
-export const setLocalStorage = (token: string) => {
+const key = "myEmail";
+export const setLocalStorage = (email: string) => {
   if (typeof window === "undefined") {
     console.log("can not access without window");
     return;
   }
-  localStorage.setItem(key, token);
+  localStorage.setItem(key, email);
 };
 
 export const getLocalStorage = () => {
@@ -12,7 +12,7 @@ export const getLocalStorage = () => {
     console.log("can not access without window");
     return;
   }
-  localStorage.getItem(key);
+  return localStorage.getItem(key);
 };
 
 export const removeLocalStorage = () => {

@@ -1,5 +1,5 @@
 import { CognitoUser, AuthenticationDetails } from "amazon-cognito-identity-js";
-import userPool from "@/pages/userPool";
+import userPool from "@/components/hooks/usePool";
 class newCognitoUser extends CognitoUser {
   public storage?: any;
 }

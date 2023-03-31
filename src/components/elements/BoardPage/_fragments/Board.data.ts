@@ -31,7 +31,7 @@ type BoardType = {
   index: number;
   title: string;
   content: string;
-  email: string;
+  userEmail: string;
   views: number;
   createdAt: string;
   updatedAt: string;

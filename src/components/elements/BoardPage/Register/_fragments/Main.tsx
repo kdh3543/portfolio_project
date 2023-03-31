@@ -6,6 +6,7 @@ import useGraphQL from "@/components/hooks/useGraphQL/useGraphQL";
 import useCognitoUser from "@/components/hooks/useCognitoUser";
 import { useRecoilState } from "recoil";
 import { userEmailValue } from "@/feature/state";
+import { getLocalStorage } from "@/utils/localstorage/localstorage";
 
 export interface TextType {
   disable: boolean;
@@ -112,11 +113,10 @@ function Main({ indexNum }: IndexType) {
     content: "",
     views: 0,
     index: 0,
-    email: "",
+    userEmail: "",
   });
   const [errorState, setErrorState] = useState(false);
-  const [userEmail, setUserEmail] = useRecoilState(userEmailValue);
-
+  const [email, setEmail] = useState<any>(null);
   const router = useRouter();
   const goBoard = () => {
     router.back();
@@ -129,7 +129,7 @@ function Main({ indexNum }: IndexType) {
       ...prev,
       [name]: value,
       index: indexNum,
-      email: userEmail,
+      userEmail: email,
     }));
   };
 
@@ -142,6 +142,10 @@ function Main({ indexNum }: IndexType) {
     useGraphQL().postBoard(registerData);
     router.push("/board");
   };
+
+  useEffect(() => {
+    setEmail(getLocalStorage());
+  }, [getLocalStorage()]);
   return (
     <>
       <Container>

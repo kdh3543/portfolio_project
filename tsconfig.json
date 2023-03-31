@@ -16,8 +16,8 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": ["./src/*"],
-      "micro": ["node_modules/micro"]
+      "@/*": ["./src/*"]
+      // "micro": ["node_modules/micro"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

@@ -86,12 +86,7 @@ function Drawer({ isOpen, changeState }: any) {
       <Container type={isOpen ? "open" : "close"}>
         <Button src={MY_IMAGE.CLOSE_WHITE} onClick={changeState} />
         <Logo>
-          <Image
-            width={60}
-            height={60}
-            src={minImg ? MY_IMAGE.LOGO : MY_IMAGE.LOGO_FULL_NAME}
-            alt=""
-          />
+          <img src={minImg ? MY_IMAGE.LOGO : MY_IMAGE.LOGO_FULL_NAME} alt="" />
         </Logo>
         <MenuBox>
           {NAV_DATA.map((item) => (

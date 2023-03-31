@@ -1,6 +1,6 @@
 import { userEmailValue } from "@/feature/state";
 import { MY_IMAGE } from "@/generated/path/images";
-import userPool from "@/pages/userPool";
+import userPool from "@/components/hooks/usePool";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -8,6 +8,10 @@ import styled from "styled-components";
 import Drawer from "./_fragments/Drawer";
 import { NAV_DATA } from "./_fragments/header.data";
 import Image from "next/image";
+import {
+  getLocalStorage,
+  removeLocalStorage,
+} from "@/utils/localstorage/localstorage";
 
 const Navbar = styled.div`
   width: 100%;
@@ -72,7 +76,7 @@ const DrawerDiv = styled.div`
   margin-left: 10px;
   width: 60px;
   > img {
-    // width: 60%;
+    width: 60%;
     cursor: pointer;
   }
   >img: active {
@@ -84,7 +88,7 @@ const DrawerDiv = styled.div`
 export default function Header() {
   const [drawerState, setDrawerState] = useState(false);
   const [minSize, setMinSize] = useState(false);
-  const [userEmail, setUserEmail] = useRecoilState(userEmailValue);
+  const [email, setEmail] = useState<any>(null);
   const router = useRouter();
 
   const openDrawer = () => {
@@ -97,7 +101,7 @@ export default function Header() {
 
   const logout = () => {
     const currentUser = userPool.getCurrentUser();
-    setUserEmail("");
+    removeLocalStorage();
     currentUser?.signOut();
     router.push("/");
   };
@@ -116,6 +120,9 @@ export default function Header() {
       }
     });
   }, []);
+  useEffect(() => {
+    setEmail(getLocalStorage());
+  }, [getLocalStorage()]);
   return (
     <>
       <>
@@ -123,18 +130,12 @@ export default function Header() {
         <Navbar>
           {minSize ? (
             <DrawerDiv>
-              <Image
-                width={32}
-                height={32}
-                onClick={openDrawer}
-                src={MY_IMAGE.DRAWER}
-                alt=""
-              />
+              <img onClick={openDrawer} src={MY_IMAGE.DRAWER} alt="" />
             </DrawerDiv>
           ) : (
             <MenuBox>
               <Logo onClick={() => router.push("/mainpage")}>
-                <Image width={40} height={32} src={MY_IMAGE.LOGO} alt="" />
+                <img src={MY_IMAGE.LOGO} alt="" />
               </Logo>
               {NAV_DATA.map((item) => {
                 return (
@@ -147,7 +148,7 @@ export default function Header() {
           )}
 
           <MemberBox>
-            {`${userEmail.split("@")[0]}님 환영합니다`}
+            {email}
             <LogoutButton onClick={logout}>LOGOUT</LogoutButton>
           </MemberBox>
         </Navbar>

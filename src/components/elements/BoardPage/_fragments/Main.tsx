@@ -1,3 +1,4 @@
+import useGraphQL from "@/components/hooks/useGraphQL";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
@@ -81,8 +82,8 @@ const ContentBox = styled.div`
   &>div: first-child,&>div: last-child  {
     width: 10%;
   }
-  &>div: nth-child(2) {
-    width: 40%;
+  &>div: nth-child(2),&>div: nth-child(3) {
+    width: 30%;
   }
   &: hover {
     transform: scale(0.98);
@@ -102,8 +103,9 @@ function Main({ lists }: any) {
 
   const router = useRouter();
 
-  const toBoardInfor = (id: string, index: number) => {
-    console.log(id);
+  const toBoardInfor = (id: string, index: number, views: number) => {
+    console.log(id, views);
+    addViews(id, views + 1);
     router.push(`/board/detail/${index}`);
   };
 
@@ -114,7 +116,11 @@ function Main({ lists }: any) {
   useEffect(() => {
     setBoards(lists?.data.listBoards.items);
   }, []);
-  console.log(boards);
+
+  const addViews = (id: string, views: number) => {
+    useGraphQL().updatePostViews(id, views);
+  };
+
   return (
     <Container>
       <MainTitle>
@@ -133,13 +139,13 @@ function Main({ lists }: any) {
           .sort((a, b) => a.index - b.index)
           .map((item, index) => (
             <ContentBox
-              onClick={() => toBoardInfor(item.id, item.index)}
+              onClick={() => toBoardInfor(item.id, item.index, item.views)}
               key={item.id}
             >
               <div>{item.index}</div>
               <div>{item.title}</div>
               <div>{item.createdAt}</div>
-              <div>{item.email}</div>
+              <div>{item.userEmail}</div>
               <div>{item.views}</div>
             </ContentBox>
           ))}

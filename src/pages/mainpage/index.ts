@@ -1,8 +1,6 @@
 import axios from "axios";
 import { CONFIG } from "../../../config";
 export { default } from "../../components/elements/MainPage";
-import userPool from "@/pages/userPool";
-import { CognitoUser } from "amazon-cognito-identity-js";
 
 // class newCognitoUser extends CognitoUser {
 //   public storage?: any;

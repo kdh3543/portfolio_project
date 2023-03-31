@@ -6,14 +6,24 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Main from "./_fragments/Main";
 import useCognitoUser from "@/components/hooks/useCognitoUser";
-import { BoardsProps } from "./_fragments/Board.data";
+import useGraphQL from "@/components/hooks/useGraphQL";
 
 function BoardPage({ lists }: any) {
   const router = useRouter();
 
   useEffect(() => {
     const currentUser = useCognitoUser().getCurrentUser();
+    console.log(currentUser);
     if (!currentUser) router.push("/");
+  }, []);
+
+  const getList = async () => {
+    const boards: any = await useGraphQL().getPost();
+    console.log(boards);
+  };
+
+  useEffect(() => {
+    getList();
   }, []);
 
   return (

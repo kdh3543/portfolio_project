@@ -3,7 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import styled from "styled-components";
-import userPool from "@/pages/userPool";
+import userPool from "@/components/hooks/usePool";
 
 const Main = styled.div`
   height: 100vh;
