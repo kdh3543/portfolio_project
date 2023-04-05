@@ -16,5 +16,26 @@
         "portfolioproject": {}
       }
     }
+  },
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-portfolioproject-prod-123723-authRole",
+      "UnauthRoleArn": "arn:aws:iam::451320390635:role/amplify-portfolioproject-prod-123723-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::451320390635:role/amplify-portfolioproject-prod-123723-authRole",
+      "Region": "ap-northeast-2",
+      "DeploymentBucketName": "amplify-portfolioproject-prod-123723-deployment",
+      "UnauthRoleName": "amplify-portfolioproject-prod-123723-unauthRole",
+      "StackName": "amplify-portfolioproject-prod-123723",
+      "StackId": "arn:aws:cloudformation:ap-northeast-2:451320390635:stack/amplify-portfolioproject-prod-123723/2e2f2ca0-d363-11ed-ba9d-060969f99a96",
+      "AmplifyAppId": "deia82v43pw77"
+    },
+    "categories": {
+      "auth": {
+        "portfolioprojectd2511aef": {}
+      },
+      "api": {
+        "portfolioproject": {}
+      }
+    }
   }
 }
