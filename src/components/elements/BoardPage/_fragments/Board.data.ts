@@ -37,5 +37,18 @@ type BoardType = {
   updatedAt: string;
 };
 
-export type { BoardType };
+type BoardDetailType = {
+  detailId: string;
+  title: string;
+  content: string;
+  email: string;
+};
+
+type BoardUpdateType = {
+  id?: string;
+  title: string;
+  content: string;
+};
+
+export type { BoardType, BoardDetailType, BoardUpdateType };
 export { BOARD_HEAD_DATA };

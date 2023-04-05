@@ -13,17 +13,12 @@ function BoardPage({ lists }: any) {
 
   useEffect(() => {
     const currentUser = useCognitoUser().getCurrentUser();
-    console.log(currentUser);
+
     if (!currentUser) router.push("/");
   }, []);
 
-  const getList = async () => {
-    const boards: any = await useGraphQL().getPost();
-    console.log(boards);
-  };
-
   useEffect(() => {
-    getList();
+    console.log(lists);
   }, []);
 
   return (

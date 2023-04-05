@@ -91,7 +91,7 @@ const Title = styled.p`
 
 function Content({ movies }: MoviesProps) {
   const [modal, setModal] = useRecoilState(modalState);
-  const [details, setDetail] = useRecoilState(detailState);
+  const [detail, setDetail] = useRecoilState(detailState);
   const openDetail = (
     id: number,
     overview: string,

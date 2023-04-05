@@ -1,5 +1,12 @@
+import useGraphQL from "@/components/hooks/useGraphQL";
+import {
+  getBoardLocalStorage,
+  getLocalStorage,
+} from "@/utils/localstorage/localstorage";
 import { useRouter } from "next/router";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { BoardUpdateType } from "../../_fragments/Board.data";
 
 export interface TextType {
   disable: boolean;
@@ -102,13 +109,41 @@ const ButtonBox = styled.div`
     border: none;
     border-radius: 5px;
   }
+  & > button:disabled {
+    cursor: not-allowed;
+  }
+  & > button:disabled:active {
+    transform: scale(1);
+  }
 `;
 
-function Main({ id }: any) {
+function Main({ detail }: any) {
+  console.log(detail);
+  const [detailData, setDetailData] = useState<BoardUpdateType>({
+    id: getBoardLocalStorage() || "",
+    title: detail.title,
+    content: detail.content,
+  });
   const router = useRouter();
   const goBoard = () => {
     router.back();
   };
+
+  const changeData = (e: any) => {
+    const { value, name } = e.target;
+    setDetailData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const updateBoard = () => {
+    useGraphQL()
+      .updateBoardDetail(detailData)
+      .then((res) => {
+        console.log(res);
+      });
+    router.back();
+  };
+
+  console.log(detailData);
   return (
     <>
       <Container>
@@ -117,23 +152,36 @@ function Main({ id }: any) {
           <Title>
             <IdBox>
               <div>{"게시판 ID"}</div>
-              <div>{id}</div>
+              <div>{detail.detailId}</div>
             </IdBox>
             <TitleBox>
               <div>{"제목"}</div>
               <input
-                disabled
+                disabled={getLocalStorage() === detail.email ? false : true}
                 type={"text"}
-                placeholder={"placeholder"}
-                value={"tete"}
+                name="title"
+                onChange={(e) => changeData(e)}
+                placeholder={"제목을 입력하세요"}
+                defaultValue={detail.title}
               />
             </TitleBox>
           </Title>
           <Content>
-            <textarea disabled value={"tete"} name="" id=""></textarea>
+            <textarea
+              disabled={getLocalStorage() === detail.email ? false : true}
+              placeholder={"내용을 입력하세요"}
+              onChange={(e) => changeData(e)}
+              defaultValue={detail.content}
+              name="content"
+            />
           </Content>
           <ButtonBox>
-            <button>{"수정"}</button>
+            <button
+              disabled={getLocalStorage() === detail.email ? false : true}
+              onClick={updateBoard}
+            >
+              {"수정"}
+            </button>
             <button onClick={goBoard}>{"이전"}</button>
           </ButtonBox>
         </Box>

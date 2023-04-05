@@ -1,6 +1,11 @@
 import useGraphQL from "@/components/hooks/useGraphQL";
+import {
+  removeBoardLocalStorage,
+  setBoardLocalStorage,
+} from "@/utils/localstorage/localstorage";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { BoardType, BOARD_HEAD_DATA } from "./Board.data";
 
@@ -104,9 +109,13 @@ function Main({ lists }: any) {
   const router = useRouter();
 
   const toBoardInfor = (id: string, index: number, views: number) => {
-    console.log(id, views);
     addViews(id, views + 1);
-    router.push(`/board/detail/${index}`);
+    // router.push(`/board/detail/${index}`);
+    removeBoardLocalStorage();
+    setBoardLocalStorage(id);
+    router.push({
+      pathname: `/board/detail/${index}`,
+    });
   };
 
   const toRegister = () => {
@@ -118,7 +127,7 @@ function Main({ lists }: any) {
   }, []);
 
   const addViews = (id: string, views: number) => {
-    useGraphQL().updatePostViews(id, views);
+    useGraphQL().updateBoardViews(id, views);
   };
 
   return (
@@ -136,7 +145,7 @@ function Main({ lists }: any) {
           ))}
         </Header>
         {boards
-          .sort((a, b) => a.index - b.index)
+          .sort((a, b) => b.index - a.index)
           .map((item, index) => (
             <ContentBox
               onClick={() => toBoardInfor(item.id, item.index, item.views)}
