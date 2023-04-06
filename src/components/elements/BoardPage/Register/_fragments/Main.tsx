@@ -5,7 +5,6 @@ import { API } from "aws-amplify";
 import useGraphQL from "@/components/hooks/useGraphQL/useGraphQL";
 import useCognitoUser from "@/components/hooks/useCognitoUser";
 import { useRecoilState } from "recoil";
-import { userEmailValue } from "@/feature/state";
 import { getLocalStorage } from "@/utils/localstorage/localstorage";
 
 export interface TextType {

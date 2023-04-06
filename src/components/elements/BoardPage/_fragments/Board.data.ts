@@ -37,11 +37,23 @@ type BoardType = {
   updatedAt: string;
 };
 
-type BoardDetailType = {
-  detailId: string;
+type BoardArrType = {
+  id: string;
+  index: number;
   title: string;
   content: string;
-  email: string;
+  userEmail: string;
+  views: number;
+  createdAt: string;
+  updatedAt: string;
+}[];
+
+type BoardDetailType = {
+  index?: string;
+  title?: string;
+  content?: string;
+  email?: string;
+  id?: string;
 };
 
 type BoardUpdateType = {
@@ -50,5 +62,5 @@ type BoardUpdateType = {
   content: string;
 };
 
-export type { BoardType, BoardDetailType, BoardUpdateType };
+export type { BoardType, BoardArrType, BoardDetailType, BoardUpdateType };
 export { BOARD_HEAD_DATA };

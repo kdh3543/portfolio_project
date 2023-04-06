@@ -1,7 +1,11 @@
 import { BoardUpdateType } from "@/components/elements/BoardPage/_fragments/Board.data";
 import { getBoard, listBoards } from "@/graphql/queries";
 import { API, graphqlOperation } from "aws-amplify";
-import { createBoard, updateBoard } from "../../../graphql/mutations";
+import {
+  createBoard,
+  deleteBoard,
+  updateBoard,
+} from "../../../graphql/mutations";
 
 function useGraphQL() {
   const postBoard = async (boardData: object) => {
@@ -9,8 +13,8 @@ function useGraphQL() {
   };
 
   const getBoardList = async () => {
-    const result = await API.graphql(graphqlOperation(listBoards));
-    return result;
+    const result: any = await API.graphql(graphqlOperation(listBoards));
+    return result.data.listBoards.items;
   };
 
   const updateBoardViews = async (id: string, views: number) => {
@@ -35,12 +39,19 @@ function useGraphQL() {
       })
     );
   };
+
+  const deleteBoardDetail = async (id: string) => {
+    console.log(id);
+    await API.graphql(graphqlOperation(deleteBoard, { input: { id } }));
+  };
+
   return {
     postBoard,
     getBoardList,
     updateBoardViews,
     getBoardById,
     updateBoardDetail,
+    deleteBoardDetail,
   };
 }
 

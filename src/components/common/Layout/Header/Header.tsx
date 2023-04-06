@@ -1,4 +1,3 @@
-import { userEmailValue } from "@/feature/state";
 import { MY_IMAGE } from "@/generated/path/images";
 import userPool from "@/components/hooks/usePool";
 import { useRouter } from "next/router";
@@ -12,6 +11,7 @@ import {
   getLocalStorage,
   removeLocalStorage,
 } from "@/utils/localstorage/localstorage";
+import { drawerState } from "@/feature/state";
 
 const Navbar = styled.div`
   width: 100%;
@@ -86,17 +86,17 @@ const DrawerDiv = styled.div`
 `;
 
 export default function Header() {
-  const [drawerState, setDrawerState] = useState(false);
+  const [drawer, setDrawer] = useRecoilState(drawerState);
   const [minSize, setMinSize] = useState(false);
   const [email, setEmail] = useState<any>(null);
   const router = useRouter();
 
   const openDrawer = () => {
-    setDrawerState(true);
+    setDrawer(true);
   };
 
   const changeState = () => {
-    setDrawerState(false);
+    setDrawer(false);
   };
 
   const logout = () => {
@@ -126,7 +126,7 @@ export default function Header() {
   return (
     <>
       <>
-        <Drawer isOpen={drawerState} changeState={changeState} />
+        <Drawer changeState={changeState} />
         <Navbar>
           {minSize ? (
             <DrawerDiv>

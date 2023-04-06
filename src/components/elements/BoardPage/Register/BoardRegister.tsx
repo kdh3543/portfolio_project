@@ -4,23 +4,21 @@ import useGraphQL from "@/components/hooks/useGraphQL";
 import { MY_IMAGE } from "@/generated/path/images";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import { BoardArrType } from "../_fragments/Board.data";
 import Main from "./_fragments/Main";
 
 function BoardRegister() {
   const [indexNum, setIndexNum] = useState(0);
   const setViewNum = async () => {
-    const result: any = await useGraphQL().getBoardList();
-    setIndexNum(
-      result?.data?.listBoards?.items.length === 0
-        ? 0
-        : result?.data?.listBoards?.items.length
-    );
+    const result: BoardArrType = await useGraphQL().getBoardList();
+    let arr: any = [];
+    result.map((val) => arr.push(val.index));
+    setIndexNum(result.length === 0 ? 1 : Math.max(...arr) + 1);
   };
   useEffect(() => {
     setViewNum();
   }, []);
 
-  console.log(indexNum);
   return (
     <>
       <Head>

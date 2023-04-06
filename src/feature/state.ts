@@ -17,7 +17,7 @@ export const detailState = atom({
   default: data,
 });
 
-export const userEmailValue = atom({
-  key: "emailValue",
-  default: "",
+export const drawerState = atom({
+  key: "drawerState",
+  default: false,
 });

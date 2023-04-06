@@ -1,15 +1,9 @@
 import useCognitoUser from "@/components/hooks/useCognitoUser";
-import { userEmailValue } from "@/feature/state";
 import { MY_IMAGE } from "@/generated/path/images";
-import userPool from "@/components/hooks/usePool";
-import {
-  getLocalStorage,
-  setLocalStorage,
-} from "@/utils/localstorage/localstorage";
+import { setLocalStorage } from "@/utils/localstorage/localstorage";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
 import styled from "styled-components";
 
 const Main = styled.div`

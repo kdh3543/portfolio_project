@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { NAV_DATA } from "./header.data";
 import Image from "next/image";
+import { useRecoilState } from "recoil";
+import { drawerState } from "@/feature/state";
 
 const Background = styled.div<{ type: "open" | "close" }>`
   width: 100%;
   height: 100%;
   background-color: #00000080;
-  position: absolute;
+  position: fixed;
   top: 0;
   visibility: ${({ type }) => (type === "open" ? "visiblity" : "hidden")};
   z-index: 4;
@@ -64,8 +66,9 @@ const Menus = styled.div`
   }
 `;
 
-function Drawer({ isOpen, changeState }: any) {
+function Drawer({ changeState }: any) {
   const [minImg, setMinImg] = useState(false);
+  const [drawer, setDrawer] = useRecoilState(drawerState);
   const router = useRouter();
   useEffect(() => {
     if (window.innerWidth < 400) {
@@ -81,16 +84,26 @@ function Drawer({ isOpen, changeState }: any) {
       }
     });
   }, []);
+
+  const changePath = (path: string) => {
+    setDrawer(false);
+    router.push(path);
+  };
   return (
-    <Background type={isOpen ? "open" : "close"}>
-      <Container type={isOpen ? "open" : "close"}>
+    <Background type={drawer ? "open" : "close"}>
+      <Container type={drawer ? "open" : "close"}>
         <Button src={MY_IMAGE.CLOSE_WHITE} onClick={changeState} />
         <Logo>
           <img src={minImg ? MY_IMAGE.LOGO : MY_IMAGE.LOGO_FULL_NAME} alt="" />
         </Logo>
         <MenuBox>
           {NAV_DATA.map((item) => (
-            <Menus onClick={() => router.push(item.path)} key={item.id}>
+            <Menus
+              onClick={() => {
+                changePath(item.path);
+              }}
+              key={item.id}
+            >
               {item.name}
             </Menus>
           ))}

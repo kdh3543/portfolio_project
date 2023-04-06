@@ -4,12 +4,12 @@ import {
   getLocalStorage,
 } from "@/utils/localstorage/localstorage";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { BoardUpdateType } from "../../_fragments/Board.data";
+import { BoardDetailType, BoardUpdateType } from "../../_fragments/Board.data";
 
-export interface TextType {
-  disable: boolean;
+export interface Visible {
+  visible: string;
 }
 
 const Container = styled.div`
@@ -98,52 +98,56 @@ const ButtonBox = styled.div`
   justify-content: center;
   display: flex;
   width: 100%;
-  & > button {
-    margin: 10px;
-    padding: 5px 50px;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 15px;
-    color: white;
-    background-color: red;
-    border: none;
-    border-radius: 5px;
-  }
-  & > button:disabled {
-    cursor: not-allowed;
-  }
-  & > button:disabled:active {
-    transform: scale(1);
-  }
+`;
+
+const Button = styled.button<Visible>`
+  margin: auto;
+  padding: 5px 50px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 15px;
+  color: white;
+  background-color: red;
+  border: none;
+  border-radius: 5px;
+  visibility: ${(props) => props.visible};
 `;
 
 function Main({ detail }: any) {
-  console.log(detail);
   const [detailData, setDetailData] = useState<BoardUpdateType>({
     id: getBoardLocalStorage() || "",
-    title: detail.title,
-    content: detail.content,
+    title: "",
+    content: "",
   });
   const router = useRouter();
   const goBoard = () => {
-    router.back();
+    router.push("/board");
   };
-
   const changeData = (e: any) => {
     const { value, name } = e.target;
     setDetailData((prev) => ({ ...prev, [name]: value }));
   };
 
   const updateBoard = () => {
-    useGraphQL()
-      .updateBoardDetail(detailData)
-      .then((res) => {
-        console.log(res);
-      });
-    router.back();
+    let tempData = detailData;
+    if (!detailData.content) {
+      tempData.content = detail.content;
+    }
+    if (!detailData.title) {
+      tempData.title = detail.title;
+    }
+    useGraphQL().updateBoardDetail(tempData);
+    setDetailData(tempData);
   };
 
-  console.log(detailData);
+  const deleteBoard = () => {
+    useGraphQL()
+      .deleteBoardDetail(detail.id)
+      .then(() => {
+        router.push("/board");
+      });
+  };
+
   return (
     <>
       <Container>
@@ -152,7 +156,7 @@ function Main({ detail }: any) {
           <Title>
             <IdBox>
               <div>{"게시판 ID"}</div>
-              <div>{detail.detailId}</div>
+              <div>{detail.index}</div>
             </IdBox>
             <TitleBox>
               <div>{"제목"}</div>
@@ -176,13 +180,25 @@ function Main({ detail }: any) {
             />
           </Content>
           <ButtonBox>
-            <button
-              disabled={getLocalStorage() === detail.email ? false : true}
+            <Button
+              visible={
+                getLocalStorage() === detail.email ? "visible" : "hidden"
+              }
+              onClick={deleteBoard}
+            >
+              {"삭제"}
+            </Button>
+            <Button
+              visible={
+                getLocalStorage() === detail.email ? "visible" : "hidden"
+              }
               onClick={updateBoard}
             >
               {"수정"}
-            </button>
-            <button onClick={goBoard}>{"이전"}</button>
+            </Button>
+            <Button visible={"visible"} onClick={goBoard}>
+              {"이전"}
+            </Button>
           </ButtonBox>
         </Box>
       </Container>

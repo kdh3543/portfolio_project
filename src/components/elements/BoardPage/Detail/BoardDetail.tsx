@@ -1,37 +1,10 @@
 import { Footer } from "@/components/common/Layout/Footer/Footer";
 import Header from "@/components/common/Layout/Header/Header";
-import useGraphQL from "@/components/hooks/useGraphQL";
 import { MY_IMAGE } from "@/generated/path/images";
-import { getBoardLocalStorage } from "@/utils/localstorage/localstorage";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import { BoardDetailType, BoardType } from "../_fragments/Board.data";
 import Main from "./_fragments/Main";
 
-function BoardDetail() {
-  const [detail, setDetail] = useState<BoardDetailType>({
-    detailId: "",
-    title: "",
-    content: "",
-    email: "",
-  });
-  const router = useRouter();
-  const { id }: any = router.query;
-  const setBoardById = async () => {
-    const result: any = await useGraphQL().getBoardById(getBoardLocalStorage());
-
-    setDetail({
-      detailId: id,
-      title: result.data.getBoard.title,
-      content: result.data.getBoard.content,
-      email: result.data.getBoard.userEmail,
-    });
-  };
-  useEffect(() => {
-    setBoardById();
-  }, [id]);
+function BoardDetail({ detail }: any) {
   return (
     <>
       <Head>

@@ -123,7 +123,7 @@ function Main({ lists }: any) {
   };
 
   useEffect(() => {
-    setBoards(lists?.data.listBoards.items);
+    setBoards(lists);
   }, []);
 
   const addViews = (id: string, views: number) => {
