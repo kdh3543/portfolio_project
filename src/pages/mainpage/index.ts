@@ -24,8 +24,6 @@ export async function getServerSideProps() {
   );
 
   const data = result.data;
-  // console.log("??????");
-  // console.log(currentUser);
   return {
     props: {
       movies: data.results,

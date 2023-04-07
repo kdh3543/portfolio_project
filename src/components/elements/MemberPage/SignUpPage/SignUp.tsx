@@ -116,7 +116,6 @@ function SignUp() {
   // const pwRegex = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{5,16}$/;
 
   const onSignUp = async () => {
-    console.log(memberData);
     if (memberData.pw !== memberData.rePw) {
       setNotSamePw(true);
       return;
@@ -124,7 +123,6 @@ function SignUp() {
     setNotSamePw(false);
     userPool.signUp(memberData.email, memberData.pw, [], [], (err, data) => {
       if (err) {
-        console.log(err.message);
         if (err.message.includes("Password not long enough")) {
           setIdErrorState(false);
           setPwErrorState(true);

@@ -6,7 +6,6 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Main from "./_fragments/Main";
 import useCognitoUser from "@/components/hooks/useCognitoUser";
-import useGraphQL from "@/components/hooks/useGraphQL";
 
 function BoardPage({ lists }: any) {
   const router = useRouter();
@@ -15,10 +14,6 @@ function BoardPage({ lists }: any) {
     const currentUser = useCognitoUser().getCurrentUser();
 
     if (!currentUser) router.push("/");
-  }, []);
-
-  useEffect(() => {
-    console.log(lists);
   }, []);
 
   return (

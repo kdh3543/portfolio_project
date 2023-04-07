@@ -1,11 +1,12 @@
+// import Pagination from "@/components/common/Pagination/Pagination";
 import useGraphQL from "@/components/hooks/useGraphQL";
 import {
   removeBoardLocalStorage,
   setBoardLocalStorage,
 } from "@/utils/localstorage/localstorage";
+import { Pagination } from "@aws-amplify/ui-react";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { BoardType, BOARD_HEAD_DATA } from "./Board.data";
 
@@ -82,13 +83,16 @@ const ContentBox = styled.div`
   & > * {
     width: 20%;
     padding: 8px;
-    // border-bottom: 1px dotted gray;
+    overflow-x: hidden;
+    white-space: nowrap;
   }
   &>div: first-child,&>div: last-child  {
     width: 10%;
+    
   }
   &>div: nth-child(2),&>div: nth-child(3) {
     width: 30%;
+    
   }
   &: hover {
     transform: scale(0.98);
@@ -96,13 +100,16 @@ const ContentBox = styled.div`
   }
 `;
 
-const Pagination = styled.div`
-  width: 100%;
-  height: 50px;
-  margin: 30px 0px;
-  text-align: center;
-`;
+// const Pagination = styled.div`
+//   width: 100%;
+//   height: 50px;
+//   margin: 30px 0px;
+//   text-align: center;
+// `;
 
+const Flex = styled.div`
+  display: flex;
+`;
 function Main({ lists }: any) {
   const [boards, setBoards] = useState<BoardType[]>([]);
 
@@ -110,7 +117,6 @@ function Main({ lists }: any) {
 
   const toBoardInfor = (id: string, index: number, views: number) => {
     addViews(id, views + 1);
-    // router.push(`/board/detail/${index}`);
     removeBoardLocalStorage();
     setBoardLocalStorage(id);
     router.push({
@@ -146,19 +152,25 @@ function Main({ lists }: any) {
         </Header>
         {boards
           .sort((a, b) => b.index - a.index)
-          .map((item, index) => (
+          .map((item) => (
             <ContentBox
               onClick={() => toBoardInfor(item.id, item.index, item.views)}
               key={item.id}
             >
               <div>{item.index}</div>
               <div>{item.title}</div>
-              <div>{item.createdAt}</div>
               <div>{item.userEmail}</div>
+              <div>{item.createdAt}</div>
               <div>{item.views}</div>
             </ContentBox>
           ))}
-        <Pagination>1 2 3 </Pagination>
+        {/* <Pagination>1 2 3 </Pagination> */}
+        <Pagination
+          totalPages={10}
+          width={"100%"}
+          display={"flex"}
+        ></Pagination>
+        {/* <Pagination></Pagination> */}
       </BoardBox>
     </Container>
   );

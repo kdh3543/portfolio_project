@@ -41,7 +41,6 @@ function useGraphQL() {
   };
 
   const deleteBoardDetail = async (id: string) => {
-    console.log(id);
     await API.graphql(graphqlOperation(deleteBoard, { input: { id } }));
   };
 
