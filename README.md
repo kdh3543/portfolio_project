@@ -12,3 +12,5 @@
 * aws amplify
 * graphql
 
+### 와이어프레임 링크(Figma)
+- https://www.figma.com/file/IXuCUwtaFjWTYTstxHv8pQ/movie-zone?node-id=0-1&t=dQd3JUG60IHbGutu-0
