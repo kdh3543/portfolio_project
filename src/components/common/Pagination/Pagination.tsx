@@ -12,7 +12,7 @@ const Flex = styled.div`
   align-items: center;
 `
 
-const Button = styled.button<ButtonType>`
+const Button = styled.button`
   font-weight: bold;
   margin: 0px 10px;
   border: none;
