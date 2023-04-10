@@ -1,5 +1,5 @@
 {
-  "AppSyncApiName": "portfolioproject",
+  "AppSyncApiName": "moviezone",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false
 }

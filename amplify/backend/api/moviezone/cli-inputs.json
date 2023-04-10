@@ -1,7 +1,7 @@
 {
   "version": 1,
   "serviceConfiguration": {
-    "apiName": "portfolioproject",
+    "apiName": "moviezone",
     "serviceName": "AppSync",
     "defaultAuthType": {
       "mode": "API_KEY",

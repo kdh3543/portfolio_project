@@ -1,17 +1,17 @@
-// import Pagination from "@/components/common/Pagination/Pagination";
-import useGraphQL from "@/components/hooks/useGraphQL";
+import Pagination from '@/components/common/Pagination/Pagination'
+import useGraphQL from '@/components/hooks/useGraphQL'
 import {
   removeBoardLocalStorage,
   setBoardLocalStorage,
-} from "@/utils/localstorage/localstorage";
-import { Pagination } from "@aws-amplify/ui-react";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import styled from "styled-components";
-import { BoardType, BOARD_HEAD_DATA } from "./Board.data";
+} from '@/utils/localstorage/localstorage'
+// import { Pagination } from "@aws-amplify/ui-react";
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import styled from 'styled-components'
+import { BoardType, BOARD_HEAD_DATA } from './Board.data'
 
 export interface SubType {
-  width: string;
+  width: string
 }
 
 const Container = styled.div`
@@ -21,7 +21,7 @@ const Container = styled.div`
   @media screen and (max-width: 1024px) {
     width: 100%;
   }
-`;
+`
 
 const MainTitle = styled.div`
   color: white;
@@ -31,7 +31,7 @@ const MainTitle = styled.div`
   font-weight: bold;
   font-size: 30px;
   position: relative;
-`;
+`
 
 const RegistButton = styled.button`
   width: 80px;
@@ -45,7 +45,7 @@ const RegistButton = styled.button`
   bottom: 0;
   border: none;
   border-radius: 5px;
-`;
+`
 
 const BoardBox = styled.div`
   width: 100%;
@@ -57,7 +57,7 @@ const BoardBox = styled.div`
   @media screen and (max-width: 1024px) {
     border-radius: 0;
   }
-`;
+`
 
 const Header = styled.div`
   width: 90%;
@@ -67,11 +67,11 @@ const Header = styled.div`
   text-align: center;
   font-weight: bold;
   border-bottom: 1px solid black;
-`;
+`
 
 const SubTitle = styled.div<SubType>`
   width: ${(props) => props.width};
-`;
+`
 
 const ContentBox = styled.div`
   display: flex;
@@ -98,7 +98,7 @@ const ContentBox = styled.div`
     transform: scale(0.98);
     box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
   }
-`;
+`
 
 // const Pagination = styled.div`
 //   width: 100%;
@@ -109,38 +109,38 @@ const ContentBox = styled.div`
 
 const Flex = styled.div`
   display: flex;
-`;
+`
 function Main({ lists }: any) {
-  const [boards, setBoards] = useState<BoardType[]>([]);
+  const [boards, setBoards] = useState<BoardType[]>([])
 
-  const router = useRouter();
+  const router = useRouter()
 
   const toBoardInfor = (id: string, index: number, views: number) => {
-    addViews(id, views + 1);
-    removeBoardLocalStorage();
-    setBoardLocalStorage(id);
+    addViews(id, views + 1)
+    removeBoardLocalStorage()
+    setBoardLocalStorage(id)
     router.push({
       pathname: `/board/detail/${index}`,
-    });
-  };
+    })
+  }
 
   const toRegister = () => {
-    router.push("/board/register");
-  };
+    router.push('/board/register')
+  }
 
   useEffect(() => {
-    setBoards(lists);
-  }, []);
+    setBoards(lists)
+  }, [])
 
   const addViews = (id: string, views: number) => {
-    useGraphQL().updateBoardViews(id, views);
-  };
+    useGraphQL().updateBoardViews(id, views)
+  }
 
   return (
     <Container>
       <MainTitle>
-        {"게시판"}
-        <RegistButton onClick={toRegister}>{"등록"}</RegistButton>{" "}
+        {'게시판'}
+        <RegistButton onClick={toRegister}>{'등록'}</RegistButton>{' '}
       </MainTitle>
       <BoardBox>
         <Header>
@@ -167,13 +167,13 @@ function Main({ lists }: any) {
         {/* <Pagination>1 2 3 </Pagination> */}
         <Pagination
           totalPages={10}
-          width={"100%"}
-          display={"flex"}
+          width={'100%'}
+          display={'flex'}
         ></Pagination>
         {/* <Pagination></Pagination> */}
       </BoardBox>
     </Container>
-  );
+  )
 }
 
-export default Main;
+export default Main

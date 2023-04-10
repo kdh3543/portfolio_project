@@ -1,40 +1,19 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-portfolioproject-dev-150904-authRole",
-      "UnauthRoleArn": "arn:aws:iam::451320390635:role/amplify-portfolioproject-dev-150904-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::451320390635:role/amplify-portfolioproject-dev-150904-authRole",
+      "AuthRoleName": "amplify-moviezone-dev-145918-authRole",
+      "UnauthRoleArn": "arn:aws:iam::451320390635:role/amplify-moviezone-dev-145918-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::451320390635:role/amplify-moviezone-dev-145918-authRole",
       "Region": "ap-northeast-2",
-      "DeploymentBucketName": "amplify-portfolioproject-dev-150904-deployment",
-      "UnauthRoleName": "amplify-portfolioproject-dev-150904-unauthRole",
-      "StackName": "amplify-portfolioproject-dev-150904",
-      "StackId": "arn:aws:cloudformation:ap-northeast-2:451320390635:stack/amplify-portfolioproject-dev-150904/33e97100-d2af-11ed-825e-02533a729f72",
-      "AmplifyAppId": "d31hrdod28sgny"
+      "DeploymentBucketName": "amplify-moviezone-dev-145918-deployment",
+      "UnauthRoleName": "amplify-moviezone-dev-145918-unauthRole",
+      "StackName": "amplify-moviezone-dev-145918",
+      "StackId": "arn:aws:cloudformation:ap-northeast-2:451320390635:stack/amplify-moviezone-dev-145918/d56aa170-d764-11ed-b2a7-0a6227b9ff00",
+      "AmplifyAppId": "dh2dldnk2cq0n"
     },
     "categories": {
       "api": {
-        "portfolioproject": {}
-      }
-    }
-  },
-  "prod": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-portfolioproject-prod-123723-authRole",
-      "UnauthRoleArn": "arn:aws:iam::451320390635:role/amplify-portfolioproject-prod-123723-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::451320390635:role/amplify-portfolioproject-prod-123723-authRole",
-      "Region": "ap-northeast-2",
-      "DeploymentBucketName": "amplify-portfolioproject-prod-123723-deployment",
-      "UnauthRoleName": "amplify-portfolioproject-prod-123723-unauthRole",
-      "StackName": "amplify-portfolioproject-prod-123723",
-      "StackId": "arn:aws:cloudformation:ap-northeast-2:451320390635:stack/amplify-portfolioproject-prod-123723/2e2f2ca0-d363-11ed-ba9d-060969f99a96",
-      "AmplifyAppId": "deia82v43pw77"
-    },
-    "categories": {
-      "auth": {
-        "portfolioprojectd2511aef": {}
-      },
-      "api": {
-        "portfolioproject": {}
+        "moviezone": {}
       }
     }
   }
