@@ -13,7 +13,7 @@
 * graphql
 
 ### 프로젝트 url주소
-- https://master.d3b8t6pn4zh5jo.amplifyapp.com/
+- https://master.dh2dldnk2cq0n.amplifyapp.com/board
 
 ### 와이어프레임(Figma) url 주소
 - https://www.figma.com/file/IXuCUwtaFjWTYTstxHv8pQ/movie-zone?node-id=0-1&t=dQd3JUG60IHbGutu-0
