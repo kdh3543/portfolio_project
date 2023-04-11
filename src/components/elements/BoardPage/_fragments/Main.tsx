@@ -100,21 +100,17 @@ const ContentBox = styled.div`
   }
 `
 
-// const Pagination = styled.div`
-//   width: 100%;
-//   height: 50px;
-//   margin: 30px 0px;
-//   text-align: center;
-// `;
-
 const Flex = styled.div`
   display: flex;
 `
 function Main({ lists }: any) {
   const [boards, setBoards] = useState<BoardType[]>([])
-
+  const [totalPages, setTotalPages] = useState(0)
+  const [totalDatas, setTotalDatas] = useState(0)
+  const [page, setPage] = useState(1)
+  const limit = 10
+  const offSet = (page - 1) * limit
   const router = useRouter()
-
   const toBoardInfor = (id: string, index: number, views: number) => {
     addViews(id, views + 1)
     removeBoardLocalStorage()
@@ -129,6 +125,8 @@ function Main({ lists }: any) {
   }
 
   useEffect(() => {
+    setTotalDatas(lists.length)
+    setTotalPages(Math.ceil(lists.length / 10))
     setBoards(lists)
   }, [])
 
@@ -152,6 +150,7 @@ function Main({ lists }: any) {
         </Header>
         {boards
           .sort((a, b) => b.index - a.index)
+          .slice(offSet, offSet + limit)
           .map((item) => (
             <ContentBox
               onClick={() => toBoardInfor(item.id, item.index, item.views)}
@@ -164,13 +163,14 @@ function Main({ lists }: any) {
               <div>{item.views}</div>
             </ContentBox>
           ))}
-        {/* <Pagination>1 2 3 </Pagination> */}
         <Pagination
-          totalPages={10}
+          setPage={setPage}
+          page={page}
+          totalDatas={totalDatas}
+          totalPages={totalPages}
           width={'100%'}
           display={'flex'}
-        ></Pagination>
-        {/* <Pagination></Pagination> */}
+        />
       </BoardBox>
     </Container>
   )
