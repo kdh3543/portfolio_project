@@ -4,15 +4,10 @@ import {
   removeBoardLocalStorage,
   setBoardLocalStorage,
 } from '@/utils/localstorage/localstorage'
-// import { Pagination } from "@aws-amplify/ui-react";
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { BoardType, BOARD_HEAD_DATA } from './Board.data'
-
-export interface SubType {
-  width: string
-}
+import { BoardType, BOARD_HEAD_DATA, SubType } from './Board.data'
 
 const Container = styled.div`
   min-height: 800px;
@@ -100,9 +95,6 @@ const ContentBox = styled.div`
   }
 `
 
-const Flex = styled.div`
-  display: flex;
-`
 function Main({ lists }: any) {
   const [boards, setBoards] = useState<BoardType[]>([])
   const [totalPages, setTotalPages] = useState(0)

@@ -1,20 +1,17 @@
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { API } from "aws-amplify";
-import useGraphQL from "@/components/hooks/useGraphQL/useGraphQL";
-import useCognitoUser from "@/components/hooks/useCognitoUser";
-import { useRecoilState } from "recoil";
-import { getLocalStorage } from "@/utils/localstorage/localstorage";
-
-export interface TextType {
-  disable: boolean;
-}
+import { useRouter } from 'next/router'
+import React, { useEffect, useState } from 'react'
+import styled from 'styled-components'
+import { API } from 'aws-amplify'
+import useGraphQL from '@/components/hooks/useGraphQL/useGraphQL'
+import useCognitoUser from '@/components/hooks/useCognitoUser'
+import { useRecoilState } from 'recoil'
+import { getLocalStorage } from '@/utils/localstorage/localstorage'
+import { IndexType } from '../../_fragments/Board.data'
 
 const Container = styled.div`
   min-height: 800px;
   width: 100%;
-`;
+`
 
 const Box = styled.div`
   width: 60%;
@@ -27,7 +24,7 @@ const Box = styled.div`
   @media screen and (max-width: 1024px) {
     width: 90%;
   }
-`;
+`
 
 const Header = styled.div`
   margin-top: 60px;
@@ -36,13 +33,13 @@ const Header = styled.div`
   font-weight: bold;
   text-align: center;
   font-size: 30px;
-`;
+`
 
 const Title = styled.div`
   display: flex;
   font-weight: bold;
   align-items: center;
-`;
+`
 const TitleBox = styled.div`
   width: 100%;
   display: flex;
@@ -61,7 +58,7 @@ const TitleBox = styled.div`
     background-color: white;
     color: gray;
   }
-`;
+`
 
 const Content = styled.div`
   margin-top: 20px;
@@ -76,7 +73,7 @@ const Content = styled.div`
     background-color: white;
     color: gray;
   }
-`;
+`
 
 const ButtonBox = styled.div`
   margin-top: 20px;
@@ -94,89 +91,85 @@ const ButtonBox = styled.div`
     border: none;
     border-radius: 5px;
   }
-`;
+`
 
 const Error = styled.div`
   width: 100%;
   color: red;
   font-size: 15px;
-`;
-
-export interface IndexType {
-  indexNum: number;
-}
+`
 
 function Main({ indexNum }: IndexType) {
   const [registerData, setRegisterData] = useState({
-    title: "",
-    content: "",
+    title: '',
+    content: '',
     views: 0,
     index: 0,
-    userEmail: "",
-  });
-  const [errorState, setErrorState] = useState(false);
-  const [email, setEmail] = useState<any>(null);
-  const router = useRouter();
+    userEmail: '',
+  })
+  const [errorState, setErrorState] = useState(false)
+  const [email, setEmail] = useState<any>(null)
+  const router = useRouter()
   const goBoard = () => {
-    router.back();
-  };
+    router.back()
+  }
 
   const inputData = (e: any) => {
-    const { value, name } = e.target;
+    const { value, name } = e.target
 
     setRegisterData((prev) => ({
       ...prev,
       [name]: value,
       index: indexNum,
       userEmail: email,
-    }));
-  };
+    }))
+  }
 
   const register = () => {
     if (!registerData.title || !registerData.content) {
-      setErrorState(true);
-      return;
+      setErrorState(true)
+      return
     }
-    setErrorState(false);
-    useGraphQL().postBoard(registerData);
-    router.push("/board");
-  };
+    setErrorState(false)
+    useGraphQL().postBoard(registerData)
+    router.push('/board')
+  }
 
   useEffect(() => {
-    setEmail(getLocalStorage());
-  }, [getLocalStorage()]);
+    setEmail(getLocalStorage())
+  }, [getLocalStorage()])
   return (
     <>
       <Container>
-        <Header>{"게시판 작성"}</Header>
+        <Header>{'게시판 작성'}</Header>
         <Box>
           <Title>
             <TitleBox>
-              <div>{"제목"}</div>
+              <div>{'제목'}</div>
               <input
                 onChange={(e) => inputData(e)}
-                type={"text"}
+                type={'text'}
                 name="title"
-                placeholder={"제목을 입력해주세요"}
+                placeholder={'제목을 입력해주세요'}
               />
             </TitleBox>
           </Title>
           <Content>
             <textarea
               onChange={(e) => inputData(e)}
-              placeholder={"내용을 입력해주세요"}
+              placeholder={'내용을 입력해주세요'}
               name="content"
             />
           </Content>
-          {errorState && <Error>{"제목과 내용 둘 다 입력해주세요."}</Error>}
+          {errorState && <Error>{'제목과 내용 둘 다 입력해주세요.'}</Error>}
           <ButtonBox>
-            <button onClick={register}>{"등록"}</button>
-            <button onClick={goBoard}>{"이전"}</button>
+            <button onClick={register}>{'등록'}</button>
+            <button onClick={goBoard}>{'이전'}</button>
           </ButtonBox>
         </Box>
       </Container>
     </>
-  );
+  )
 }
 
-export default Main;
+export default Main

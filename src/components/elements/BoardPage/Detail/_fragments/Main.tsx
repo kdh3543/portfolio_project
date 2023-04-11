@@ -1,21 +1,17 @@
-import useGraphQL from "@/components/hooks/useGraphQL";
+import useGraphQL from '@/components/hooks/useGraphQL'
 import {
   getBoardLocalStorage,
   getLocalStorage,
-} from "@/utils/localstorage/localstorage";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { BoardDetailType, BoardUpdateType } from "../../_fragments/Board.data";
-
-export interface Visible {
-  visible: string;
-}
+} from '@/utils/localstorage/localstorage'
+import { useRouter } from 'next/router'
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import { BoardUpdateType, Visible } from '../../_fragments/Board.data'
 
 const Container = styled.div`
   min-height: 800px;
   width: 100%;
-`;
+`
 
 const Box = styled.div`
   width: 60%;
@@ -28,7 +24,7 @@ const Box = styled.div`
   @media screen and (max-width: 1024px) {
     width: 90%;
   }
-`;
+`
 
 const Header = styled.div`
   margin-top: 60px;
@@ -37,13 +33,13 @@ const Header = styled.div`
   font-weight: bold;
   text-align: center;
   font-size: 30px;
-`;
+`
 
 const Title = styled.div`
   display: flex;
   font-weight: bold;
   align-items: center;
-`;
+`
 const IdBox = styled.div`
   width: 20%;
   display: flex;
@@ -57,7 +53,7 @@ const IdBox = styled.div`
     font-size: 20px;
     text-align: center;
   }
-`;
+`
 const TitleBox = styled.div`
   width: 80%;
   display: flex;
@@ -76,7 +72,7 @@ const TitleBox = styled.div`
     background-color: white;
     color: gray;
   }
-`;
+`
 
 const Content = styled.div`
   margin-top: 20px;
@@ -91,14 +87,14 @@ const Content = styled.div`
     background-color: white;
     color: gray;
   }
-`;
+`
 
 const ButtonBox = styled.div`
   margin-top: 20px;
   justify-content: center;
   display: flex;
   width: 100%;
-`;
+`
 
 const Button = styled.button<Visible>`
   margin: auto;
@@ -111,61 +107,61 @@ const Button = styled.button<Visible>`
   border: none;
   border-radius: 5px;
   visibility: ${(props) => props.visible};
-`;
+`
 
 function Main({ detail }: any) {
   const [detailData, setDetailData] = useState<BoardUpdateType>({
-    id: getBoardLocalStorage() || "",
-    title: "",
-    content: "",
-  });
-  const router = useRouter();
+    id: getBoardLocalStorage() || '',
+    title: '',
+    content: '',
+  })
+  const router = useRouter()
   const goBoard = () => {
-    router.push("/board");
-  };
+    router.push('/board')
+  }
   const changeData = (e: any) => {
-    const { value, name } = e.target;
-    setDetailData((prev) => ({ ...prev, [name]: value }));
-  };
+    const { value, name } = e.target
+    setDetailData((prev) => ({ ...prev, [name]: value }))
+  }
 
   const updateBoard = () => {
-    let tempData = detailData;
+    let tempData = detailData
     if (!detailData.content) {
-      tempData.content = detail.content;
+      tempData.content = detail.content
     }
     if (!detailData.title) {
-      tempData.title = detail.title;
+      tempData.title = detail.title
     }
-    useGraphQL().updateBoardDetail(tempData);
-    setDetailData(tempData);
-  };
+    useGraphQL().updateBoardDetail(tempData)
+    setDetailData(tempData)
+  }
 
   const deleteBoard = () => {
     useGraphQL()
       .deleteBoardDetail(detail.id)
       .then(() => {
-        router.push("/board");
-      });
-  };
+        router.push('/board')
+      })
+  }
 
   return (
     <>
       <Container>
-        <Header>{"게시판 상세 내용"}</Header>
+        <Header>{'게시판 상세 내용'}</Header>
         <Box>
           <Title>
             <IdBox>
-              <div>{"게시판 ID"}</div>
+              <div>{'게시판 ID'}</div>
               <div>{detail.index}</div>
             </IdBox>
             <TitleBox>
-              <div>{"제목"}</div>
+              <div>{'제목'}</div>
               <input
                 disabled={getLocalStorage() === detail.email ? false : true}
-                type={"text"}
+                type={'text'}
                 name="title"
                 onChange={(e) => changeData(e)}
-                placeholder={"제목을 입력하세요"}
+                placeholder={'제목을 입력하세요'}
                 defaultValue={detail.title}
               />
             </TitleBox>
@@ -173,7 +169,7 @@ function Main({ detail }: any) {
           <Content>
             <textarea
               disabled={getLocalStorage() === detail.email ? false : true}
-              placeholder={"내용을 입력하세요"}
+              placeholder={'내용을 입력하세요'}
               onChange={(e) => changeData(e)}
               defaultValue={detail.content}
               name="content"
@@ -182,28 +178,28 @@ function Main({ detail }: any) {
           <ButtonBox>
             <Button
               visible={
-                getLocalStorage() === detail.email ? "visible" : "hidden"
+                getLocalStorage() === detail.email ? 'visible' : 'hidden'
               }
               onClick={deleteBoard}
             >
-              {"삭제"}
+              {'삭제'}
             </Button>
             <Button
               visible={
-                getLocalStorage() === detail.email ? "visible" : "hidden"
+                getLocalStorage() === detail.email ? 'visible' : 'hidden'
               }
               onClick={updateBoard}
             >
-              {"수정"}
+              {'수정'}
             </Button>
-            <Button visible={"visible"} onClick={goBoard}>
-              {"이전"}
+            <Button visible={'visible'} onClick={goBoard}>
+              {'이전'}
             </Button>
           </ButtonBox>
         </Box>
       </Container>
     </>
-  );
+  )
 }
 
-export default Main;
+export default Main
