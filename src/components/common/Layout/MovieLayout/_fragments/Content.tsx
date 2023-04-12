@@ -1,31 +1,27 @@
-import styled from "styled-components";
-import axios from "axios";
-import { useEffect } from "react";
-import { CONFIG } from "../../../../../../config";
-import { useDispatch } from "react-redux";
-import modalSlice from "@/feature/modal/modalSlice";
-import movieSlice from "@/feature/movie/movieSlice";
-import { useRecoilState } from "recoil";
-import { detailState, modalState } from "@/feature/state";
+import styled from 'styled-components'
+import { CONFIG } from '../../../../../../config'
+import { useRecoilState } from 'recoil'
+import { detailState, modalState } from '@/feature/state'
+import { MoviesProps } from './Movie.data'
 
-type Movie = {
-  id: number;
-  title: string;
-  overview: string;
-  poster_path: string;
-  vote_average: number;
-};
+// type Movie = {
+//   id: number
+//   title: string
+//   overview: string
+//   poster_path: string
+//   vote_average: number
+// }
 
-type MoviesProps = {
-  movies: Movie[];
-};
+// type MoviesProps = {
+//   movies: Movie[]
+// }
 
 const Container = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 20px;
-`;
+`
 
 const ListBox = styled.div`
   width: 80%;
@@ -33,18 +29,18 @@ const ListBox = styled.div`
   padding: 10px;
   justify-content: space-around;
   flex-wrap: wrap;
-`;
+`
 
 const MovieBox = styled.div`
   width: 300px;
   height: 400px;
   position: relative;
   margin: 10px 0px;
-`;
+`
 
 const Wrapper = styled.div`
   margin: 40px 20px;
-`;
+`
 
 const Image = styled.img`
   width: 100%;
@@ -56,7 +52,7 @@ const Image = styled.img`
   &:hover {
     transform: scale(0.98);
   }
-`;
+`
 
 const Detail = styled.div`
   width: 100%;
@@ -78,7 +74,7 @@ const Detail = styled.div`
   &: hover {
     visibility: visible;
   }
-`;
+`
 
 const Title = styled.p`
   width: 100%;
@@ -87,11 +83,11 @@ const Title = styled.p`
   color: white;
   font-weight: bold;
   overflow-x: hidden;
-`;
+`
 
 function Content({ movies }: MoviesProps) {
-  const [modal, setModal] = useRecoilState(modalState);
-  const [detail, setDetail] = useRecoilState(detailState);
+  const [modal, setModal] = useRecoilState(modalState)
+  const [detail, setDetail] = useRecoilState(detailState)
   const openDetail = (
     id: number,
     overview: string,
@@ -103,10 +99,10 @@ function Content({ movies }: MoviesProps) {
       overview,
       title,
       poster_path,
-    };
-    setModal(true);
-    setDetail(data);
-  };
+    }
+    setModal(true)
+    setDetail(data)
+  }
   return (
     <Container>
       <ListBox>
@@ -134,11 +130,11 @@ function Content({ movies }: MoviesProps) {
                 <Title>{value.title}</Title>
               </MovieBox>
             </Wrapper>
-          );
+          )
         })}
       </ListBox>
     </Container>
-  );
+  )
 }
 
-export default Content;
+export default Content

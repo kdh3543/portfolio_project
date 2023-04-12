@@ -1,17 +1,17 @@
-import { MY_IMAGE } from "@/generated/path/images";
-import userPool from "@/components/hooks/usePool";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import styled from "styled-components";
-import Drawer from "./_fragments/Drawer";
-import { NAV_DATA } from "./_fragments/header.data";
-import Image from "next/image";
+import { MY_IMAGE } from '@/generated/path/images'
+import userPool from '@/components/hooks/usePool'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import { useRecoilState } from 'recoil'
+import styled from 'styled-components'
+import Drawer from './_fragments/Drawer'
+import { NAV_DATA } from './_fragments/header.data'
+import Image from 'next/image'
 import {
   getLocalStorage,
   removeLocalStorage,
-} from "@/utils/localstorage/localstorage";
-import { drawerState } from "@/feature/state";
+} from '@/utils/localstorage/localstorage'
+import { drawerState } from '@/feature/state'
 
 const Navbar = styled.div`
   width: 100%;
@@ -28,7 +28,7 @@ const Navbar = styled.div`
   background-color: black;
   opacity: 85%;
   z-index: 3;
-`;
+`
 
 const MenuBox = styled.div`
   display: flex;
@@ -36,18 +36,18 @@ const MenuBox = styled.div`
   font-weight: bold;
   margin-left: 10px;
   cursor: pointer;
-`;
+`
 
 const MemberBox = styled.div`
   margin-right: 10px;
   display: flex;
   align-items: center;
   font-size: 13px;
-`;
+`
 
 const Logo = styled.p`
   cursor: pointer;
-`;
+`
 
 const Menus = styled.button`
   border: none;
@@ -58,7 +58,7 @@ const Menus = styled.button`
   font-family: Inter;
   cursor: pointer;
   margin-left: 20px;
-`;
+`
 
 const LogoutButton = styled.button`
   border: none;
@@ -67,7 +67,7 @@ const LogoutButton = styled.button`
   margin: 0px 20px;
   color: white;
   font-weight: bold;
-`;
+`
 
 const DrawerDiv = styled.div`
   display: flex;
@@ -83,46 +83,46 @@ const DrawerDiv = styled.div`
     transform: scale(0.98);
     box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
   }
-`;
+`
 
 export default function Header() {
-  const [drawer, setDrawer] = useRecoilState(drawerState);
-  const [minSize, setMinSize] = useState(false);
-  const [email, setEmail] = useState<any>(null);
-  const router = useRouter();
+  const [drawer, setDrawer] = useRecoilState(drawerState)
+  const [minSize, setMinSize] = useState(false)
+  const [email, setEmail] = useState<any>(null)
+  const router = useRouter()
 
   const openDrawer = () => {
-    setDrawer(true);
-  };
+    setDrawer(true)
+  }
 
   const changeState = () => {
-    setDrawer(false);
-  };
+    setDrawer(false)
+  }
 
   const logout = () => {
-    const currentUser = userPool.getCurrentUser();
-    removeLocalStorage();
-    currentUser?.signOut();
-    router.push("/");
-  };
+    const currentUser = userPool.getCurrentUser()
+    removeLocalStorage()
+    currentUser?.signOut()
+    router.push('/')
+  }
 
   useEffect(() => {
     if (window.innerWidth < 768) {
-      setMinSize(true);
+      setMinSize(true)
     } else {
-      setMinSize(false);
+      setMinSize(false)
     }
-    window.addEventListener("resize", () => {
+    window.addEventListener('resize', () => {
       if (window.innerWidth < 768) {
-        setMinSize(true);
+        setMinSize(true)
       } else {
-        setMinSize(false);
+        setMinSize(false)
       }
-    });
-  }, []);
+    })
+  }, [])
   useEffect(() => {
-    setEmail(getLocalStorage());
-  }, [getLocalStorage()]);
+    setEmail(getLocalStorage())
+  }, [getLocalStorage()])
   return (
     <>
       <>
@@ -134,15 +134,23 @@ export default function Header() {
             </DrawerDiv>
           ) : (
             <MenuBox>
-              <Logo onClick={() => router.push("/mainpage")}>
+              <Logo onClick={() => router.push('/mainpage')}>
                 <img src={MY_IMAGE.LOGO} alt="" />
               </Logo>
               {NAV_DATA.map((item) => {
                 return (
-                  <Menus key={item.id} onClick={() => router.push(item.path)}>
-                    {item.name}{" "}
+                  <Menus
+                    key={item.id}
+                    onClick={() =>
+                      router.push({
+                        pathname: item.path,
+                        query: 'past',
+                      })
+                    }
+                  >
+                    {item.name}{' '}
                   </Menus>
-                );
+                )
               })}
             </MenuBox>
           )}
@@ -154,5 +162,5 @@ export default function Header() {
         </Navbar>
       </>
     </>
-  );
+  )
 }

@@ -1,11 +1,11 @@
-import styled from "styled-components";
-import { useDispatch, useSelector } from "react-redux";
-import modalSlice from "@/feature/modal/modalSlice";
-import { useRecoilState } from "recoil";
-import { detailState, modalState } from "@/feature/state";
-import { CONFIG } from "../../../../config";
-import { useEffect } from "react";
-import { MY_IMAGE } from "@/generated/path/images";
+import styled from 'styled-components'
+import { useDispatch, useSelector } from 'react-redux'
+import modalSlice from '@/feature/modal/modalSlice'
+import { useRecoilState } from 'recoil'
+import { detailState, modalState } from '@/feature/state'
+import { CONFIG } from '../../../../config'
+import { useEffect } from 'react'
+import { MY_IMAGE } from '@/generated/path/images'
 
 const Modal = styled.div`
   width: 100%;
@@ -17,7 +17,7 @@ const Modal = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 3;
-`;
+`
 
 const Container = styled.div`
   width: 50%;
@@ -35,12 +35,12 @@ const Container = styled.div`
   @media screen and (max-width: 767px) {
     width: 100%;
   }
-`;
+`
 
 const Box = styled.div`
   width: 80%;
   height: 80%;
-`;
+`
 
 const Title = styled.div`
   text-align: center;
@@ -50,7 +50,7 @@ const Title = styled.div`
     margin-top: 10px;
     font-size: 15px;
   }
-`;
+`
 
 const CloseButton = styled.img`
   position: absolute;
@@ -63,7 +63,7 @@ const CloseButton = styled.img`
   &: active {
     transform: scale(0.9);
   }
-`;
+`
 
 const Content = styled.div`
   width: 100%;
@@ -77,7 +77,7 @@ const Content = styled.div`
     text-align: center;
     margin: 20px 0px;
   }
-`;
+`
 
 const Image = styled.img`
   box-shadow: 8px 5px 22px 10px rgba(0, 0, 0, 0.24);
@@ -92,7 +92,7 @@ const Image = styled.img`
     width: 70%;
     height: 300px;
   }
-`;
+`
 
 const Description = styled.div`
   width: 40%;
@@ -101,12 +101,13 @@ const Description = styled.div`
   line-height: 20px;
   @media screen and (max-width: 1024px) {
     width: 100%;
-    height: 50%;
+    height: 100px;
     text-align: center;
     overflow-y: auto;
     margin: 20px auto;
+    font-size: 12px;
   }
-`;
+`
 
 const ReserveButton = styled.button`
   background-color: red;
@@ -117,23 +118,23 @@ const ReserveButton = styled.button`
   cursor: pointer;
   font-weight: bold;
   border-radius: 10px;
-`;
+`
 
 function DetailModal() {
-  const [modal, setModal] = useRecoilState(modalState);
-  const [details, setDetails] = useRecoilState(detailState);
+  const [modal, setModal] = useRecoilState(modalState)
+  const [details, setDetails] = useRecoilState(detailState)
   const closeModal = () => {
-    setModal(false);
-  };
+    setModal(false)
+  }
 
   useEffect(() => {
-    window.addEventListener("click", (event: MouseEvent) => {
-      const target = event.target as HTMLElement;
-      if (target.querySelector("#modal")?.id === "modal") {
-        setModal(false);
+    window.addEventListener('click', (event: MouseEvent) => {
+      const target = event.target as HTMLElement
+      if (target.querySelector('#modal')?.id === 'modal') {
+        setModal(false)
       }
-    });
-  }, []);
+    })
+  }, [])
 
   return (
     <>
@@ -144,24 +145,24 @@ function DetailModal() {
 
             <Box>
               <Title>
-                {"영화 상세 정보"}
+                {'영화 상세 정보'}
                 <br />
                 <div>{details.title}</div>
               </Title>
               <Content>
                 <Image src={`${CONFIG.API_IMAGE}/${details.poster_path}`} />
                 <Description>
-                  {details.overview ? details.overview : "영화 정보 없음"}
+                  {details.overview ? details.overview : '영화 정보 없음'}
                   {/* testetststestetesttestetststestetesttestetststestetesttestetststestetesttestetststestetesttestetststestetesttestetststestetesttestetststestetesttestetststestetesttestetststestetest */}
                 </Description>
               </Content>
-              <ReserveButton>{"예매하기"}</ReserveButton>
+              <ReserveButton>{'예매하기'}</ReserveButton>
             </Box>
           </Container>
         </Modal>
       )}
     </>
-  );
+  )
 }
 
-export default DetailModal;
+export default DetailModal
