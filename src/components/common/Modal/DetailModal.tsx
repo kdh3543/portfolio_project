@@ -40,6 +40,7 @@ const Container = styled.div`
 const Box = styled.div`
   width: 80%;
   height: 80%;
+  overflow-y: auto;
 `
 
 const Title = styled.div`
@@ -101,9 +102,8 @@ const Description = styled.div`
   line-height: 20px;
   @media screen and (max-width: 1024px) {
     width: 100%;
-    height: 100px;
     text-align: center;
-    overflow-y: auto;
+    // overflow-y: auto;
     margin: 20px auto;
     font-size: 12px;
   }

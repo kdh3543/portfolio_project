@@ -15,6 +15,7 @@ function PastPage({ movies }: MoviesProps) {
     const currentUser = useCognitoUser().getCurrentUser()
     if (!currentUser) router.push('/')
   }, [])
+
   return (
     <>
       <Head>

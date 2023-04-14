@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { useRef, useState } from 'react'
 import styled from 'styled-components'
 
 const Header = styled.div`
@@ -35,6 +36,8 @@ const SearchButton = styled.button`
 const Search = styled.input`
   margin-right: 5px;
   height: 25px;
+  font-size: 12px;
+  padding-left: 5px;
 `
 
 interface TitleType {
@@ -42,12 +45,32 @@ interface TitleType {
 }
 
 export default function Title({ title }: TitleType) {
+  const [searchKeyword, setSearchKeyword] = useState('')
+  const inputRef = useRef<HTMLInputElement>(null)
+  const router = useRouter()
+  const onSearch = () => {
+    console.log(searchKeyword)
+    if (title === '/past') {
+      router.push(`/past?keyword=${searchKeyword}`)
+    } else {
+      router.push(`/mainpage?keyword=${searchKeyword}`)
+    }
+
+    setSearchKeyword('')
+    inputRef.current?.focus()
+  }
   return (
     <Header>
       <p>{title === '/past' ? '지난 상영작' : '현재 상영작'}</p>
       <SearchBox>
-        <Search />
-        <SearchButton> {'검색 '}</SearchButton>
+        <Search
+          onChange={(e) => setSearchKeyword(e.target.value)}
+          type="text"
+          placeholder="영화제목을 입력해주세요"
+          value={searchKeyword}
+          ref={inputRef}
+        />
+        <SearchButton onClick={onSearch}> {'검색 '}</SearchButton>
       </SearchBox>
     </Header>
   )

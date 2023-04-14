@@ -9,13 +9,12 @@ const Main = styled.div`
   min-height: 600px;
 `
 
-function MovieLayout(props: MoviesProps) {
+function MovieLayout({ movies }: MoviesProps) {
   const router = useRouter()
-  console.log(props)
   return (
     <Main>
       <Title title={router.pathname} />
-      <Content movies={props.movies} searchKeyword={props.searchKeyword} />
+      <Content movies={movies} />
     </Main>
   )
 }

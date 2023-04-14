@@ -26,4 +26,7 @@ type MoviesProps = {
   movies: Movie[]
 }
 
-export type { MoviesProps, MovieDetail }
+interface SearchType {
+  query?: string
+}
+export type { Movie, MoviesProps, MovieDetail, SearchType }

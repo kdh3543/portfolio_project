@@ -1,14 +1,13 @@
 import axios from 'axios'
 import { CONFIG } from '../../../config'
+import {
+  Movie,
+  SearchType,
+} from '@/components/common/Layout/MovieLayout/_fragments/Movie.data'
 export { default } from '../../components/elements/MainPage'
 
-// class newCognitoUser extends CognitoUser {
-//   public storage?: any;
-// }
-
-export async function getStaticProps() {
-  // const currentUser: newCognitoUser | null = userPool.getCurrentUser();
-
+export async function getServerSideProps(context: SearchType) {
+  const { keyword }: any = context.query
   const date = new Date()
   const year = date.getFullYear()
   const month = String(date.getMonth() + 1).padStart(2, '0')
@@ -23,7 +22,16 @@ export async function getStaticProps() {
     `${CONFIG.API_URL}/movie/popular?api_key=${CONFIG.API_KEY}&language=ko-KR&sort_by=popularity.desc&release_date.gte=${lastDay}&release_date.lte=${today}&page=1&include_adult=false`
   )
 
-  const data = result.data
+  let data = result.data
+
+  if (keyword) {
+    data = data.results.filter((val: Movie) => val.title.includes(keyword))
+    return {
+      props: {
+        movies: data,
+      },
+    }
+  }
   return {
     props: {
       movies: data.results,
