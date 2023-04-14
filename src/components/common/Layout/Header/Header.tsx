@@ -139,15 +139,7 @@ export default function Header() {
               </Logo>
               {NAV_DATA.map((item) => {
                 return (
-                  <Menus
-                    key={item.id}
-                    onClick={() =>
-                      router.push({
-                        pathname: item.path,
-                        query: 'past',
-                      })
-                    }
-                  >
+                  <Menus key={item.id} onClick={() => router.push(item.path)}>
                     {item.name}{' '}
                   </Menus>
                 )
