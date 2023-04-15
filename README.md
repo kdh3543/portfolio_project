@@ -27,3 +27,19 @@
 ### 프로젝트 기능 설명
 
 1. 로그인/회원가입
+  * 로그인
+
+![image](https://user-images.githubusercontent.com/91539013/232228850-c001802c-a437-4f78-b861-b945604a4289.png)
+
+  * 회원가입
+
+![image](https://user-images.githubusercontent.com/91539013/232228904-f71b1b32-b889-4976-8327-12471cd1501e.png)
+
+  * 이메일 인증
+
+![image](https://user-images.githubusercontent.com/91539013/232228932-a2213970-5973-4e17-a47b-4ab6f5dacac2.png)
+
+2. 영화 리스트(현재 상영작 / 지난 상영작)
+
+![image](https://user-images.githubusercontent.com/91539013/232229036-fb4cb166-6982-448a-9f52-0a40ba321624.png)
+
