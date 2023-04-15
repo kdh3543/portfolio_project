@@ -23,3 +23,7 @@
 
 ### 와이어프레임(Figma) url 주소
 - https://www.figma.com/file/IXuCUwtaFjWTYTstxHv8pQ/movie-zone?node-id=0-1&t=dQd3JUG60IHbGutu-0
+
+### 프로젝트 기능 설명
+
+1. 로그인/회원가입
