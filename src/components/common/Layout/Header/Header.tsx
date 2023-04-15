@@ -149,7 +149,7 @@ export default function Header() {
 
           <MemberBox>
             {email}
-            <LogoutButton onClick={logout}>LOGOUT</LogoutButton>
+            <LogoutButton onClick={logout}>{'LOGOUT'}</LogoutButton>
           </MemberBox>
         </Navbar>
       </>
