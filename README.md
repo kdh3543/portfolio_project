@@ -27,6 +27,7 @@
 ### 프로젝트 기능 설명
 
 1. 로그인/회원가입
+ 
   * 로그인
 
 ![image](https://user-images.githubusercontent.com/91539013/232228850-c001802c-a437-4f78-b861-b945604a4289.png)
@@ -38,6 +39,19 @@
   * 이메일 인증
 
 ![image](https://user-images.githubusercontent.com/91539013/232228932-a2213970-5973-4e17-a47b-4ab6f5dacac2.png)
+
+ * 코드
+    - amazon-cognito-identity-js에 있는 CognitoUserPool 함수를 통해 로그인/회원가입을 할 수 있는 userPool 생성
+  
+    ![image](https://user-images.githubusercontent.com/91539013/232319288-6927d692-38af-4b87-a918-87f8d0b7622d.png)
+  
+    - useCognitoUser로 hook을 생성하여 CognitoUser에 회원가입 데이터를 입력하여 회원가입 구현
+
+    ![image](https://user-images.githubusercontent.com/91539013/232319590-3a0cc9cc-552a-435b-9878-b381b03a54ec.png)
+
+    - amazon-cognito-identity-js에 있는 authenticateUser에 로그인 데이터를 넣어 일치하는지 확인 후 성공시 mainpage로 이동
+    
+    ![image](https://user-images.githubusercontent.com/91539013/232319838-0355d91c-afce-4537-aa62-4ba79bbdacd6.png)
 
 2. 영화 리스트(현재 상영작 / 지난 상영작)
 
