@@ -43,3 +43,17 @@
 
 ![image](https://user-images.githubusercontent.com/91539013/232229036-fb4cb166-6982-448a-9f52-0a40ba321624.png)
 
+3. 게시판
+ * 리스트
+ 
+ ![image](https://user-images.githubusercontent.com/91539013/232319016-d17ee069-c35a-4414-978b-dede8769e7a5.png)
+
+ * 등록
+ 
+ ![image](https://user-images.githubusercontent.com/91539013/232319056-d5f9d0f3-483d-448d-84fe-31d9eaf9b6c1.png)
+
+
+ * 게시판 글 확인/수정/삭제
+ 
+ ![image](https://user-images.githubusercontent.com/91539013/232319099-d1ab3963-3230-4de1-8d7a-8e0c16e6a4a0.png)
+
