@@ -3,6 +3,7 @@ import { CONFIG } from '../../../../../../config'
 import { useRecoilState } from 'recoil'
 import { detailState, modalState } from '@/feature/state'
 import { MoviesProps } from './Movie.data'
+import Pagination from '@/components/common/Pagination/Pagination'
 
 // type Movie = {
 //   id: number
@@ -104,36 +105,39 @@ function Content({ movies }: MoviesProps) {
     setDetail(data)
   }
   return (
-    <Container>
-      <ListBox>
-        {movies.map((value) => {
-          return (
-            <Wrapper key={value.id}>
-              <MovieBox>
-                <Image
-                  src={`${CONFIG.API_IMAGE}/${value.poster_path}`}
-                  alt=""
-                  onClick={() =>
-                    openDetail(
-                      value.id,
-                      value.overview,
-                      value.title,
-                      value.poster_path
-                    )
-                  }
-                />
-                <Detail>
-                  {value.title}
-                  <br />
-                  {`평점: ${value.vote_average}`}
-                </Detail>
-                <Title>{value.title}</Title>
-              </MovieBox>
-            </Wrapper>
-          )
-        })}
-      </ListBox>
-    </Container>
+    <>
+      <Container>
+        <ListBox>
+          {movies.map((value) => {
+            return (
+              <Wrapper key={value.id}>
+                <MovieBox>
+                  <Image
+                    src={`${CONFIG.API_IMAGE}/${value.poster_path}`}
+                    alt=""
+                    onClick={() =>
+                      openDetail(
+                        value.id,
+                        value.overview,
+                        value.title,
+                        value.poster_path
+                      )
+                    }
+                  />
+                  <Detail>
+                    {value.title}
+                    <br />
+                    {`평점: ${value.vote_average}`}
+                  </Detail>
+                  <Title>{value.title}</Title>
+                </MovieBox>
+              </Wrapper>
+            )
+          })}
+        </ListBox>
+      </Container>
+      <Pagination totalDatas={10} totalPages={2}></Pagination>
+    </>
   )
 }
 

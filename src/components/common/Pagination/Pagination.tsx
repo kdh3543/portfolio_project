@@ -21,6 +21,7 @@ const Button = styled.button<ButtonType>`
   cursor: pointer;
   transform: scale(${(props) => (props.active ? 1.2 : 1.0)});
   color: ${(props) => (props.active ? 'blue' : 'black')};
+
   &: hover {
     transform: scale(1.1);
   }
