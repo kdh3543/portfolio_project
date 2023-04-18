@@ -4,7 +4,8 @@ import { useRecoilState } from 'recoil'
 import { detailState, modalState } from '@/feature/state'
 import { MoviesProps } from './Movie.data'
 import Pagination from '@/components/common/Pagination/Pagination'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 
 // type Movie = {
 //   id: number
@@ -87,10 +88,11 @@ const Title = styled.p`
   overflow-x: hidden;
 `
 
-function Content({ movies }: MoviesProps) {
+function Content({ datas }: any) {
   const [modal, setModal] = useRecoilState(modalState)
   const [detail, setDetail] = useRecoilState(detailState)
   const [page, setPage] = useState(1)
+  const router = useRouter()
   const openDetail = (
     id: number,
     overview: string,
@@ -106,11 +108,23 @@ function Content({ movies }: MoviesProps) {
     setModal(true)
     setDetail(data)
   }
+
+  const changePage = (num: number) => {
+    setPage(num)
+    console.log(router.pathname)
+    if (router.pathname === '/past') {
+      router.push(`/past?currPage=${num}`)
+    } else router.push(`/mainpage?currPage=${num}`)
+  }
+
+  useEffect(() => {
+    setPage(parseInt(datas.currPage))
+  }, [datas.currPage])
   return (
     <>
       <Container>
         <ListBox>
-          {movies.map((value) => {
+          {datas.movies.map((value: any) => {
             return (
               <Wrapper key={value.id}>
                 <MovieBox>
@@ -139,11 +153,11 @@ function Content({ movies }: MoviesProps) {
         </ListBox>
       </Container>
       <Pagination
-        page={1}
-        setPage={setPage}
-        totalDatas={10}
-        totalPages={2}
-      ></Pagination>
+        page={page}
+        changePage={(num: number) => changePage(num)}
+        totalDatas={100}
+        totalPages={5}
+      />
     </>
   )
 }

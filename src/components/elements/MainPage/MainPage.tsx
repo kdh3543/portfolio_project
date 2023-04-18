@@ -9,10 +9,8 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import useCognitoUser from '@/components/hooks/useCognitoUser'
 
-function MainPage({ movies }: MoviesProps) {
+function MainPage({ datas }: MoviesProps) {
   const router = useRouter()
-  console.log('??')
-  console.log(movies)
   useEffect(() => {
     const currentUser = useCognitoUser().getCurrentUser()
     if (!currentUser) router.push('/')
@@ -27,7 +25,7 @@ function MainPage({ movies }: MoviesProps) {
         <link rel="icon" href={MY_IMAGE.LOGO} />
       </Head>
       <Header />
-      <MovieLayout movies={movies} />
+      <MovieLayout datas={datas} />
       <Footer />
       <DetailModal />
     </>

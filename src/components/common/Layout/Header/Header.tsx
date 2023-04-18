@@ -140,7 +140,7 @@ export default function Header() {
               {NAV_DATA.map((item) => {
                 return (
                   <Menus key={item.id} onClick={() => router.push(item.path)}>
-                    {item.name}{' '}
+                    {item.name}
                   </Menus>
                 )
               })}

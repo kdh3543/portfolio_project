@@ -8,9 +8,8 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-function PastPage({ movies }: MoviesProps) {
+function PastPage({ datas }: MoviesProps) {
   const router = useRouter()
-
   useEffect(() => {
     const currentUser = useCognitoUser().getCurrentUser()
     if (!currentUser) router.push('/')
@@ -25,7 +24,7 @@ function PastPage({ movies }: MoviesProps) {
         <link rel="icon" href={MY_IMAGE.LOGO} />
       </Head>
       <Header />
-      <MovieLayout movies={movies} />
+      <MovieLayout datas={datas} />
       <Footer />
     </>
   )

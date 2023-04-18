@@ -23,10 +23,18 @@ interface MovieDetail {
 }
 
 type MoviesProps = {
+  datas: {
+    movies: Movie[]
+    currPage: string
+  }
   movies: Movie[]
+  currPage: string
 }
 
-interface SearchType {
-  query?: string
+interface PropsType {
+  query?: {
+    keyword?: string
+    currPage?: string
+  }
 }
-export type { Movie, MoviesProps, MovieDetail, SearchType }
+export type { Movie, MoviesProps, MovieDetail, PropsType }

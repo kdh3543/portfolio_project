@@ -51,9 +51,9 @@ export default function Title({ title }: TitleType) {
   const onSearch = () => {
     console.log(searchKeyword)
     if (title === '/past') {
-      router.push(`/past?keyword=${searchKeyword}`)
+      router.push(`/past?currPage=1&keyword=${searchKeyword}`)
     } else {
-      router.push(`/mainpage?keyword=${searchKeyword}`)
+      router.push(`/mainpage?currPage=1&keyword=${searchKeyword}`)
     }
 
     setSearchKeyword('')
