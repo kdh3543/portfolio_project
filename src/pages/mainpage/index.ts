@@ -8,6 +8,8 @@ export { default } from '../../components/elements/MainPage'
 
 export async function getServerSideProps(context: SearchType) {
   const { keyword }: any = context.query
+  console.log('들어옴??')
+  console.log(keyword)
   const date = new Date()
   const year = date.getFullYear()
   const month = String(date.getMonth() + 1).padStart(2, '0')
@@ -19,7 +21,9 @@ export async function getServerSideProps(context: SearchType) {
   const today = `${year}-${month}-${day}`
   const lastDay = `${agoYear}-${agoMonth}-${agoDay}`
   const result = await axios.get(
-    `${CONFIG.API_URL}/movie/popular?api_key=${CONFIG.API_KEY}&language=ko-KR&sort_by=popularity.desc&release_date.gte=${lastDay}&release_date.lte=${today}&page=1&include_adult=false`
+    `${CONFIG.API_URL}/movie/popular?api_key=${
+      CONFIG.API_KEY
+    }&language=ko-KR&sort_by=popularity.desc&release_date.gte=${lastDay}&page=${1}&release_date.lte=${today}&include_adult=false`
   )
 
   let data = result.data

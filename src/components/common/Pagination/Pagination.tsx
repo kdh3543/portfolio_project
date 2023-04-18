@@ -1,8 +1,10 @@
+import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
 export interface ButtonType {
   active: boolean
   disabled: boolean
+  pathname: string
 }
 
 const Flex = styled.div`
@@ -20,7 +22,13 @@ const Button = styled.button<ButtonType>`
   background: none;
   cursor: pointer;
   transform: scale(${(props) => (props.active ? 1.2 : 1.0)});
-  color: ${(props) => (props.active ? 'blue' : 'black')};
+  color: ${(props) =>
+    (props.pathname === '/board' && props.active) ||
+    (props.pathname !== '/board' && props.active)
+      ? 'blue'
+      : props.pathname === '/board' && !props.active
+      ? 'black'
+      : 'white'};
 
   &: hover {
     transform: scale(1.1);
@@ -31,21 +39,23 @@ const Button = styled.button<ButtonType>`
   }
 `
 
-function Pagination({ totalDatas, totalPages, page, setPage }: any) {
-  console.log(page, totalPages, totalDatas)
+function Pagination({ totalDatas, totalPages, page, changePage }: any) {
+  const router = useRouter()
   return (
     <Flex>
       <Button
+        pathname={router.pathname}
         active={false}
-        onClick={() => setPage(page - 1)}
+        onClick={() => changePage(page - 1)}
         disabled={page === 1 ? true : false}
       >
         &lt;
       </Button>
       {Array.from({ length: totalPages }, (_, i) => (
         <Button
+          pathname={router.pathname}
           disabled={false}
-          onClick={() => setPage(i + 1)}
+          onClick={() => changePage(i + 1)}
           active={page === i + 1 ? true : false}
           key={i + 1}
         >
@@ -53,8 +63,9 @@ function Pagination({ totalDatas, totalPages, page, setPage }: any) {
         </Button>
       ))}
       <Button
+        pathname={router.pathname}
         active={false}
-        onClick={() => setPage(page + 1)}
+        onClick={() => changePage(page + 1)}
         disabled={
           page === totalPages || totalDatas === 0 || !totalDatas ? true : false
         }

@@ -126,6 +126,11 @@ function Main({ lists }: any) {
     useGraphQL().updateBoardViews(id, views)
   }
 
+  const changePage = (num: number) => {
+    setPage(num)
+    router.push(`/board?page=${num}`)
+  }
+
   return (
     <Container>
       <MainTitle>
@@ -156,7 +161,7 @@ function Main({ lists }: any) {
             </ContentBox>
           ))}
         <Pagination
-          setPage={setPage}
+          changePage={(num: number) => changePage(num)}
           page={page}
           totalDatas={totalDatas}
           totalPages={totalPages}

@@ -9,7 +9,7 @@ import useCognitoUser from '@/components/hooks/useCognitoUser'
 
 function BoardPage({ lists }: any) {
   const router = useRouter()
-  console.log(lists.length)
+  console.log(lists)
   useEffect(() => {
     const currentUser = useCognitoUser().getCurrentUser()
 

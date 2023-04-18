@@ -4,6 +4,7 @@ import { useRecoilState } from 'recoil'
 import { detailState, modalState } from '@/feature/state'
 import { MoviesProps } from './Movie.data'
 import Pagination from '@/components/common/Pagination/Pagination'
+import { useState } from 'react'
 
 // type Movie = {
 //   id: number
@@ -89,6 +90,7 @@ const Title = styled.p`
 function Content({ movies }: MoviesProps) {
   const [modal, setModal] = useRecoilState(modalState)
   const [detail, setDetail] = useRecoilState(detailState)
+  const [page, setPage] = useState(1)
   const openDetail = (
     id: number,
     overview: string,
@@ -136,7 +138,12 @@ function Content({ movies }: MoviesProps) {
           })}
         </ListBox>
       </Container>
-      <Pagination totalDatas={10} totalPages={2}></Pagination>
+      <Pagination
+        page={1}
+        setPage={setPage}
+        totalDatas={10}
+        totalPages={2}
+      ></Pagination>
     </>
   )
 }
