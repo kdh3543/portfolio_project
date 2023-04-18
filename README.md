@@ -57,6 +57,12 @@
 
 ![image](https://user-images.githubusercontent.com/91539013/232229036-fb4cb166-6982-448a-9f52-0a40ba321624.png)
 
+ * 코드
+
+   - getServerSideProps로 데이터를 미리 받아와서 렌더링하여 UI의 초기 로딩 속도 개선
+
+   ![image](https://user-images.githubusercontent.com/91539013/232650058-90be3fe0-8b68-44ac-8e57-16493dacbcca.png)
+   
 3. 게시판
  * 리스트
  
@@ -70,4 +76,18 @@
  * 게시판 글 확인/수정/삭제
  
  ![image](https://user-images.githubusercontent.com/91539013/232319099-d1ab3963-3230-4de1-8d7a-8e0c16e6a4a0.png)
-
+ 
+ * 코드
+ 
+   - schema.graphql에 Board table 생성
+   
+   ![image](https://user-images.githubusercontent.com/91539013/232652302-5405e545-6f76-412f-b7e1-5b59a31f1d3f.png)
+   
+   - custom hook을 생성해 graphql에서 board 데이터에 대한 CRUD 코드 모듈화
+ 
+   ![image](https://user-images.githubusercontent.com/91539013/232652625-a9b3ece7-86ad-4f4d-9897-d8bd1a46cd85.png)
+ 
+   - getServerSideProps로 Board 데이터를 받아와 Board 페이지에 렌더
+ 
+   ![image](https://user-images.githubusercontent.com/91539013/232652470-96cb6035-e4ee-4ae1-b83c-d94c88624e26.png)
+ 
