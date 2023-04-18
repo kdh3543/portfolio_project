@@ -6,10 +6,10 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Main from './_fragments/Main'
 import useCognitoUser from '@/components/hooks/useCognitoUser'
+import { BoardArrType } from './_fragments/Board.data'
 
-function BoardPage({ lists }: any) {
+function BoardPage({ lists }: BoardArrType) {
   const router = useRouter()
-  console.log(lists)
   useEffect(() => {
     const currentUser = useCognitoUser().getCurrentUser()
 

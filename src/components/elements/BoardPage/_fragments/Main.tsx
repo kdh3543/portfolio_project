@@ -7,7 +7,7 @@ import {
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { BoardType, BOARD_HEAD_DATA, SubType } from './Board.data'
+import { BoardType, BOARD_HEAD_DATA, SubType, BoardArrType } from './Board.data'
 
 const Container = styled.div`
   min-height: 800px;
@@ -95,7 +95,7 @@ const ContentBox = styled.div`
   }
 `
 
-function Main({ lists }: any) {
+function Main({ lists }: BoardArrType) {
   const [boards, setBoards] = useState<BoardType[]>([])
   const [totalPages, setTotalPages] = useState(0)
   const [totalDatas, setTotalDatas] = useState(0)
@@ -111,7 +111,6 @@ function Main({ lists }: any) {
       pathname: `/board/detail/${index}`,
     })
   }
-
   const toRegister = () => {
     router.push('/board/register')
   }
@@ -128,7 +127,7 @@ function Main({ lists }: any) {
 
   const changePage = (num: number) => {
     setPage(num)
-    router.push(`/board?page=${num}`)
+    router.push(`/board`)
   }
 
   return (

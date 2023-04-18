@@ -40,15 +40,8 @@ type BoardType = {
 }
 
 type BoardArrType = {
-  id: string
-  index: number
-  title: string
-  content: string
-  userEmail: string
-  views: number
-  createdAt: string
-  updatedAt: string
-}[]
+  lists: BoardType[]
+}
 
 type BoardDetailType = {
   index?: string

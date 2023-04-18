@@ -41,6 +41,7 @@ const Button = styled.button<ButtonType>`
 
 function Pagination({ totalDatas, totalPages, page, changePage }: any) {
   const router = useRouter()
+  console.log('현재 페이지는  ', page)
   return (
     <Flex>
       <Button

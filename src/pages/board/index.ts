@@ -1,12 +1,12 @@
-import useGraphQL from "@/components/hooks/useGraphQL";
+import useGraphQL from '@/components/hooks/useGraphQL'
 
-export { default } from "../../components/elements/BoardPage";
+export { default } from '../../components/elements/BoardPage'
 
 export async function getServerSideProps() {
-  const lists: any = await useGraphQL().getBoardList();
+  const lists: any = await useGraphQL().getBoardList()
   return {
     props: {
       lists,
     },
-  };
+  }
 }
