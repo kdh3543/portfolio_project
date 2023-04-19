@@ -111,7 +111,6 @@ function Content({ datas }: any) {
 
   const changePage = (num: number) => {
     setPage(num)
-    console.log(router.pathname)
     if (router.pathname === '/past') {
       router.push(`/past?currPage=${num}`)
     } else router.push(`/mainpage?currPage=${num}`)

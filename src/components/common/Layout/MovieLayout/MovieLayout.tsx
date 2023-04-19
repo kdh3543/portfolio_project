@@ -11,7 +11,6 @@ const Main = styled.div`
 
 function MovieLayout({ datas }: any) {
   const router = useRouter()
-  console.log('여기야!!!', datas)
   return (
     <Main>
       <Title title={router.pathname} />

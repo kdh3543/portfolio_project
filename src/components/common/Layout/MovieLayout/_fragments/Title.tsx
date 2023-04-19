@@ -49,7 +49,6 @@ export default function Title({ title }: TitleType) {
   const inputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
   const onSearch = () => {
-    console.log(searchKeyword)
     if (title === '/past') {
       router.push(`/past?currPage=1&keyword=${searchKeyword}`)
     } else {
