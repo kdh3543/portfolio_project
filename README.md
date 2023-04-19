@@ -21,6 +21,12 @@
 ### 프로젝트 url주소
 - https://master.dh2dldnk2cq0n.amplifyapp.com
 
+  * 테스트 계정 
+    
+    로그인 이메일: test1234@naver.com
+    
+    로그인 비밀번호: test1234
+
 ### 와이어프레임(Figma) url 주소
 - https://www.figma.com/file/IXuCUwtaFjWTYTstxHv8pQ/movie-zone?node-id=0-1&t=dQd3JUG60IHbGutu-0
 
