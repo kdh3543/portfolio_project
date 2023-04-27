@@ -85,6 +85,15 @@ const DrawerDiv = styled.div`
   }
 `
 
+const MemberButton = styled.button`
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 0px 20px;
+  color: white;
+  font-weight: bold;
+`
+
 export default function Header() {
   const [drawer, setDrawer] = useRecoilState(drawerState)
   const [minSize, setMinSize] = useState(false)
@@ -105,6 +114,8 @@ export default function Header() {
     currentUser?.signOut()
     router.push('/')
   }
+
+  const toMemberInforPage = () => {}
 
   useEffect(() => {
     if (window.innerWidth < 768) {
@@ -148,6 +159,9 @@ export default function Header() {
           )}
 
           <MemberBox>
+            <MemberButton onClick={toMemberInforPage}>
+              {'회원정보'}
+            </MemberButton>
             {email}
             <LogoutButton onClick={logout}>{'LOGOUT'}</LogoutButton>
           </MemberBox>
