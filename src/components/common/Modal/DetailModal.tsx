@@ -127,6 +127,11 @@ function DetailModal() {
     setModal(false)
   }
 
+  const onReserve = () => {
+    alert('예매완료!')
+    setModal(false)
+  }
+
   useEffect(() => {
     window.addEventListener('click', (event: MouseEvent) => {
       const target = event.target as HTMLElement
@@ -153,10 +158,9 @@ function DetailModal() {
                 <Image src={`${CONFIG.API_IMAGE}/${details.poster_path}`} />
                 <Description>
                   {details.overview ? details.overview : '영화 정보 없음'}
-                  {/* testetststestetesttestetststestetesttestetststestetesttestetststestetesttestetststestetesttestetststestetesttestetststestetesttestetststestetesttestetststestetesttestetststestetest */}
                 </Description>
               </Content>
-              <ReserveButton>{'예매하기'}</ReserveButton>
+              <ReserveButton onClick={onReserve}>{'예매하기'}</ReserveButton>
             </Box>
           </Container>
         </Modal>
