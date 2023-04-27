@@ -83,7 +83,7 @@ const Content = styled.div`
 const Image = styled.img`
   box-shadow: 8px 5px 22px 10px rgba(0, 0, 0, 0.24);
   border-radius: 10px;
-  width: 40%;
+  width: 36%;
   @media screen and (min-width: 768px) and (max-width: 1024px) {
     width: 60%;
     height: 300px;
