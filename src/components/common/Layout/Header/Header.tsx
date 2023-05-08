@@ -115,7 +115,9 @@ export default function Header() {
     router.push('/')
   }
 
-  const toMemberInforPage = () => {}
+  const toMemberInforPage = () => {
+    router.push('/inforpage')
+  }
 
   useEffect(() => {
     if (window.innerWidth < 768) {
