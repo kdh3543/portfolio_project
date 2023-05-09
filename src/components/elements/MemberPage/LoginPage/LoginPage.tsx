@@ -90,6 +90,10 @@ const Error = styled.div`
   color: red;
   font-size: 13px;
   margin-left: 150px;
+  @media screen and (max-width: 767px) {
+    margin-left: 100px;
+    font-size: 10px;
+  }
 `
 
 function LoginPage() {
@@ -144,6 +148,12 @@ function LoginPage() {
     setLoginData((prev) => ({ ...prev, [name]: value }))
   }
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      onLogin()
+    }
+  }
+
   return (
     <>
       <Head>
@@ -163,6 +173,7 @@ function LoginPage() {
             <InputBox>
               <InputTitle>{'이메일: '}</InputTitle>
               <InputText
+                onKeyPress={handleKeyPress}
                 onChange={(e) => inputData(e)}
                 name="email"
                 type={'text'}
@@ -176,6 +187,7 @@ function LoginPage() {
                 name="pw"
                 onChange={(e) => inputData(e)}
                 type={'password'}
+                onKeyPress={handleKeyPress}
                 placeholder="비밀번호를 입력해주세요."
               />
             </InputBox>

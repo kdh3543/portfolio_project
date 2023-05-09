@@ -1,25 +1,26 @@
-import { BoardUpdateType } from "@/components/elements/BoardPage/_fragments/Board.data";
-import { getBoard, listBoards } from "@/graphql/queries";
-import { API, graphqlOperation } from "aws-amplify";
+import { BoardUpdateType } from '@/components/elements/BoardPage/_fragments/Board.data'
+import { getBoard, listBoards } from '@/graphql/queries'
+import { API, graphqlOperation } from 'aws-amplify'
 import {
   createBoard,
   deleteBoard,
   updateBoard,
-} from "../../../graphql/mutations";
+} from '../../../graphql/mutations'
 
 function useGraphQL() {
   const postBoard = async (boardData: object) => {
-    await API.graphql(graphqlOperation(createBoard, { input: boardData }));
-  };
+    await API.graphql(graphqlOperation(createBoard, { input: boardData }))
+  }
 
   const getBoardList = async () => {
-    const result: any = await API.graphql(graphqlOperation(listBoards));
-    return result.data.listBoards.items;
-  };
+    const result: any = await API.graphql(graphqlOperation(listBoards))
+    console.log('뭐야...', result)
+    return result.data.listBoards.items
+  }
 
   const updateBoardViews = async (id: string, views: number) => {
-    await API.graphql(graphqlOperation(updateBoard, { input: { id, views } }));
-  };
+    await API.graphql(graphqlOperation(updateBoard, { input: { id, views } }))
+  }
 
   const getBoardById = async (id: any) => {
     if (id) {
@@ -27,22 +28,22 @@ function useGraphQL() {
         graphqlOperation(getBoard, {
           id,
         })
-      );
-      return result;
+      )
+      return result
     }
-  };
+  }
 
   const updateBoardDetail = async (data: BoardUpdateType) => {
     await API.graphql(
       graphqlOperation(updateBoard, {
         input: { id: data.id, content: data.content, title: data.title },
       })
-    );
-  };
+    )
+  }
 
   const deleteBoardDetail = async (id: string) => {
-    await API.graphql(graphqlOperation(deleteBoard, { input: { id } }));
-  };
+    await API.graphql(graphqlOperation(deleteBoard, { input: { id } }))
+  }
 
   return {
     postBoard,
@@ -51,7 +52,7 @@ function useGraphQL() {
     getBoardById,
     updateBoardDetail,
     deleteBoardDetail,
-  };
+  }
 }
 
-export default useGraphQL;
+export default useGraphQL

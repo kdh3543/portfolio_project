@@ -4,16 +4,17 @@ import useGraphQL from '@/components/hooks/useGraphQL'
 import { MY_IMAGE } from '@/generated/path/images'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
-import { BoardArrType } from '../_fragments/Board.data'
+import { BoardType } from '../_fragments/Board.data'
 import Main from './_fragments/Main'
 
 function BoardRegister() {
   const [indexNum, setIndexNum] = useState(0)
   const setViewNum = async () => {
-    const { lists }: BoardArrType = await useGraphQL().getBoardList()
+    const lists: BoardType[] = await useGraphQL().getBoardList()
+    console.log('list 개수', lists)
     let arr: any = []
-    lists.map((val) => arr.push(val.index))
-    setIndexNum(lists.length === 0 ? 1 : Math.max(...arr) + 1)
+    lists?.map((val) => arr.push(val.index))
+    setIndexNum(lists?.length === 0 ? 1 : Math.max(...arr) + 1)
   }
   useEffect(() => {
     setViewNum()
