@@ -108,8 +108,8 @@ const Button = styled.button<Visible>`
   border-radius: 5px;
   visibility: ${(props) => props.visible};
   @media screen and (max-width: 767px) {
-    padding: 2px 20px;
-    font-size: 12px;
+    padding: 4px 50px;
+    font-size: 10px;
   }
 `
 
@@ -155,7 +155,7 @@ function Main({ detail }: any) {
         <Box>
           <Title>
             <IdBox>
-              <div>{'게시판 ID'}</div>
+              <div>{'NO.'}</div>
               <div>{detail.index}</div>
             </IdBox>
             <TitleBox>
@@ -194,7 +194,7 @@ function Main({ detail }: any) {
               }
               onClick={updateBoard}
             >
-              {'수정1'}
+              {'수정'}
             </Button>
             <Button visible={'visible'} onClick={goBoard}>
               {'이전'}
