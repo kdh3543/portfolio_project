@@ -30,9 +30,43 @@ const MainBox = styled.div`
   border-radius: 10px;
   min-height: 500px;
   border: 1px solid white;
+  text-align: center;
   @media screen and (max-width: 1024px) {
     border-radius: 0;
   }
+`
+
+const InforContainer = styled.div`
+  width: 80%;
+  margin: auto;
+  height: 100%;
+`
+
+const InforBox = styled.div`
+  display: flex;
+  margin: 50px 0px;
+  align-items: center;
+`
+
+const InforTitle = styled.div`
+  width: 30%;
+  text-align: right;
+  font-weight: bolder;
+`
+
+const InforContent = styled.div`
+  width: 70%;
+`
+
+const Button = styled.button`
+  margin: 10px;
+  padding: 5px 20px;
+  background-color: red;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  font-weight: bolder;
+  cursor: pointer;
 `
 
 export default function InforPage() {
@@ -47,7 +81,27 @@ export default function InforPage() {
       <Header />
       <Container>
         <MainTitle>{'회원정보'}</MainTitle>
-        <MainBox></MainBox>
+        <MainBox>
+          <InforContainer>
+            <InforBox>
+              <InforTitle>이메일:</InforTitle>
+              <InforContent>test1234@naver.com</InforContent>
+            </InforBox>
+            <InforBox>
+              <InforTitle>비밀번호:</InforTitle>
+              <InforContent>content</InforContent>
+            </InforBox>
+            <InforBox>
+              <InforTitle>비밀번호 확인:</InforTitle>
+              <InforContent>content</InforContent>
+            </InforBox>
+            <InforBox>
+              <InforTitle>title</InforTitle>
+              <InforContent>content</InforContent>
+            </InforBox>
+          </InforContainer>
+          <Button>{'변경'}</Button>
+        </MainBox>
       </Container>
       <Footer />
     </>
