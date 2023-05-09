@@ -141,11 +141,13 @@ function Main({ detail }: any) {
   }
 
   const deleteBoard = () => {
-    useGraphQL()
-      .deleteBoardDetail(detail.id)
-      .then(() => {
-        router.push('/board')
-      })
+    if (confirm('정말 삭제하시겠습니까?')) {
+      useGraphQL()
+        .deleteBoardDetail(detail.id)
+        .then(() => {
+          router.push('/board')
+        })
+    }
   }
 
   return (
