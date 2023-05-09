@@ -116,7 +116,6 @@ function Main({ indexNum }: IndexType) {
 
   const inputData = (e: any) => {
     const { value, name } = e.target
-    console.log(indexNum)
     setRegisterData((prev) => ({
       ...prev,
       [name]: value,
@@ -130,7 +129,6 @@ function Main({ indexNum }: IndexType) {
       setErrorState(true)
       return
     }
-    console.log(registerData)
     setErrorState(false)
     useGraphQL().postBoard(registerData)
     router.push('/board')

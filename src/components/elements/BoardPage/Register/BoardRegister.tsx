@@ -10,8 +10,10 @@ import Main from './_fragments/Main'
 function BoardRegister() {
   const [indexNum, setIndexNum] = useState(0)
   const setViewNum = async () => {
-    const lists: BoardType[] = await useGraphQL().getBoardList()
-    console.log('list 개수', lists)
+    const lists: BoardType[] = await useGraphQL().getBoardList()(
+      'list 개수',
+      lists
+    )
     let arr: any = []
     lists?.map((val) => arr.push(val.index))
     setIndexNum(lists?.length === 0 ? 1 : Math.max(...arr) + 1)

@@ -14,7 +14,6 @@ function useGraphQL() {
 
   const getBoardList = async () => {
     const result: any = await API.graphql(graphqlOperation(listBoards))
-    console.log('뭐야...', result)
     return result.data.listBoards.items
   }
 
