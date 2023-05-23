@@ -15,6 +15,7 @@ function BoardPage({ lists }: BoardArrType) {
 
     if (!currentUser) router.push('/')
   }, [])
+  console.log('list의 개수는 ', lists)
 
   return (
     <>
