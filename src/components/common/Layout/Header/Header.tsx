@@ -35,7 +35,6 @@ const MenuBox = styled.div`
   align-items: center;
   font-weight: bold;
   margin-left: 10px;
-  cursor: pointer;
 `
 
 const MemberBox = styled.div`

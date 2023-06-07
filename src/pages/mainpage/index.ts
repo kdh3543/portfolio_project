@@ -7,10 +7,9 @@ import {
 export { default } from '../../components/elements/MainPage'
 
 export async function getServerSideProps(context: PropsType) {
-  const { keyword }: any = context.query
-  const { currPage }: any = context.query
+  const { keyword, currPage }: any = context.query
 
-  const date = new Date()
+  // const date = new Date()
 
   // const today = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(
   //   2,

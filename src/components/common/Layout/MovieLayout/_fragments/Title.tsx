@@ -50,19 +50,30 @@ export default function Title({ title }: TitleType) {
   const router = useRouter()
   const onSearch = () => {
     if (title === '/past') {
-      router.push(`/past?currPage=1&keyword=${searchKeyword}`)
+      searchKeyword
+        ? router.push(`/past?currPage=1&keyword=${searchKeyword}`)
+        : router.push('/past?currPage=1')
     } else {
-      router.push(`/mainpage?currPage=1&keyword=${searchKeyword}`)
+      searchKeyword
+        ? router.push(`/mainpage?currPage=1&keyword=${searchKeyword}`)
+        : router.push(`/mainpage?currPage=1`)
     }
 
     setSearchKeyword('')
     inputRef.current?.focus()
   }
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      onSearch()
+    }
+  }
+
   return (
     <Header>
       <p>{title === '/past' ? '지난 상영작' : '현재 상영작'}</p>
       <SearchBox>
         <Search
+          onKeyPress={handleKeyPress}
           onChange={(e) => setSearchKeyword(e.target.value)}
           type="text"
           placeholder="영화제목을 입력해주세요"

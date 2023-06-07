@@ -88,6 +88,15 @@ const Title = styled.p`
   overflow-x: hidden;
 `
 
+const Temp = styled.p`
+  width: 100%;
+  margin-top: 20px;
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+`
+
 function Content({ datas }: any) {
   const [modal, setModal] = useRecoilState(modalState)
   const [detail, setDetail] = useRecoilState(detailState)
@@ -121,6 +130,8 @@ function Content({ datas }: any) {
   }, [datas.currPage])
   return (
     <>
+      {datas.movies.length === 0 ? <Temp>{'검색 결과가 없습니다.'}</Temp> : ''}
+
       <Container>
         <ListBox>
           {datas.movies.map((value: any) => {

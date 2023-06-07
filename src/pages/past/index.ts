@@ -7,8 +7,7 @@ import {
 export { default } from '../../components/elements/PastPage'
 
 export async function getServerSideProps(context: PropsType) {
-  const { keyword }: any = context.query
-  const { currPage }: any = context.query
+  const { keyword, currPage }: any = context.query
   const result = await axios.get(
     `${CONFIG.API_URL}/movie/popular?api_key=${CONFIG.API_KEY}&language=ko-KR&sort_by=popularity.desc&release_date.gte=2019-01-01&release_date.lte=2019-03-20&page=${currPage}&include_adult=false`
   )
