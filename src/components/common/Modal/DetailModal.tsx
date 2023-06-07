@@ -21,7 +21,7 @@ const Modal = styled.div`
 
 const Container = styled.div`
   width: 50%;
-  height: 90%;
+  height: 80%;
   background-color: white;
   display: flex;
   justify-content: center;
@@ -128,7 +128,6 @@ function DetailModal() {
   }
 
   const onReserve = () => {
-    alert('예매완료!')
     setModal(false)
   }
 
@@ -160,7 +159,7 @@ function DetailModal() {
                   {details.overview ? details.overview : '영화 정보 없음'}
                 </Description>
               </Content>
-              <ReserveButton onClick={onReserve}>{'예매하기'}</ReserveButton>
+              {/* <ReserveButton onClick={onReserve}>{'예매하기'}</ReserveButton> */}
             </Box>
           </Container>
         </Modal>
