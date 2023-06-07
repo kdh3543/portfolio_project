@@ -1,7 +1,7 @@
 # 💻 Movie-Zone
 
 
-* Next.js + graphql + amplify 를 이용한 간이영화예매 및 게시판 기능 애플리케이션 구현
+* Next.js + graphql + amplify 를 이용한 로그인, 회원가입, 영화 정보 공유 및 게시판 기능 애플리케이션 구현
 
 ## 주요 기능
 
