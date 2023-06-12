@@ -3,7 +3,7 @@ const nextConfig = {
   // reactStrictMode: true,
   styledComponents: true,
   compiler: {
-    // removeConsole: true,
+    removeConsole: true,
   },
   ignoreDuringBuilds: [
     /critical dependency:/,

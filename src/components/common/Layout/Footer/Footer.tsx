@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { SOCIAL_MENU } from "./_fragments/social.data";
+import styled from 'styled-components'
+import { SOCIAL_MENU } from './_fragments/social.data'
 
 const Bottom = styled.div`
   color: white;
@@ -7,17 +7,17 @@ const Bottom = styled.div`
   font-weight: bold;
   padding: 30px;
   padding-top: 20px;
-`;
+`
 
 const Title = styled.div`
   font-size: 20px;
-`;
+`
 
 const Content = styled.div`
   font-size: 15px;
   margin-top: 10px;
   line-height: 25px;
-`;
+`
 
 const Social = styled.div`
   display: flex;
@@ -30,25 +30,25 @@ const Social = styled.div`
   & > img {
     cursor: pointer;
   }
-`;
+`
 
 const Text = styled.p`
   font-size: 18px;
-`;
+`
 
-const Images = styled.img``;
+const Images = styled.img``
 
 export function Footer() {
   return (
     <Bottom>
-      <Title>{"김동현의 Movie Zone (M.Z)"}</Title>
-      <Content>
+      <Title>{'김동현의 Movie Zone (M.Z)'}</Title>
+      {/* <Content>
         {"연락처: 010-2252-9969"}
         <br />
         {"주소: 서울특별시 갈현동 456-18 드림빌 602호"}
-      </Content>
+      </Content> */}
       <Social>
-        <Text>{"made by 북한코뿔소"}</Text>
+        <Text>{'made by 북한코뿔소'}</Text>
         {SOCIAL_MENU.map((item) => {
           return (
             // eslint-disable-next-line @next/next/no-img-element
@@ -58,9 +58,9 @@ export function Footer() {
               onClick={() => window.open(item.path)}
               alt=""
             />
-          );
+          )
         })}
       </Social>
     </Bottom>
-  );
+  )
 }
