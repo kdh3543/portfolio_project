@@ -1,7 +1,7 @@
 import { MY_IMAGE } from '@/generated/path/images'
 import userPool from '@/components/hooks/usePool'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import styled from 'styled-components'
 import Drawer from './_fragments/Drawer'
@@ -151,18 +151,15 @@ export default function Header() {
               </Logo>
               {NAV_DATA.map((item) => {
                 return (
-                  <>
+                  <Fragment key={item.id}>
                     {item.id === 4 ? (
                       ''
                     ) : (
-                      <Menus
-                        key={item.id}
-                        onClick={() => router.push(item.path)}
-                      >
+                      <Menus onClick={() => router.push(item.path)}>
                         {item.name}
                       </Menus>
                     )}
-                  </>
+                  </Fragment>
                 )
               })}
             </MenuBox>

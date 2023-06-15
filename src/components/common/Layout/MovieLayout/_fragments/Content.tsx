@@ -102,6 +102,7 @@ function Content({ datas }: any) {
   const [detail, setDetail] = useRecoilState(detailState)
   const [page, setPage] = useState(1)
   const router = useRouter()
+  console.log(datas)
   const openDetail = (
     id: number,
     overview: string,
