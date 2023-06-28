@@ -57,29 +57,31 @@ const Image = styled.img`
   }
 `
 
-const Detail = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  opacity: 60%;
-  position: absolute;
-  border-radius: 15px;
-  top: 0;
-  display: flex;
-  padding-top: 20px;
-  justify-content: center;
-  text-align: center;
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
-  line-height: 50px;
-  visibility: hidden;
-  &: hover {
-    visibility: visible;
-  }
-`
+// const Detail = styled.div`
+//   width: 100%;
+//   height: 100%;
+//   background-color: white;
+//   color: red;
+//   z-index: 10;
+//   opacity: 60%;
+//   position: absolute;
+//   border-radius: 15px;
+//   top: 0;
+//   display: flex;
+//   padding-top: 20px;
+//   justify-content: center;
+//   text-align: center;
+//   color: white;
+//   font-size: 20px;
+//   font-weight: bold;
+//   line-height: 50px;
+//   visibility: hidden;
+//   &: hover {
+//     visibility: visible;
+//   }
+// `
 
-const Title = styled.p`
+const Title = styled.div`
   width: 100%;
   margin-top: 10px;
   text-align: center;
@@ -102,7 +104,6 @@ function Content({ datas }: any) {
   const [detail, setDetail] = useRecoilState(detailState)
   const [page, setPage] = useState(1)
   const router = useRouter()
-  console.log(datas)
   const openDetail = (
     id: number,
     overview: string,
@@ -121,14 +122,15 @@ function Content({ datas }: any) {
 
   const changePage = (num: number) => {
     setPage(num)
-    if (router.pathname === '/past') {
-      router.push(`/past?currPage=${num}`)
+    if (router.pathname === '/future') {
+      router.push(`/future?currPage=${num}`)
     } else router.push(`/mainpage?currPage=${num}`)
   }
 
   useEffect(() => {
     setPage(parseInt(datas.currPage))
   }, [datas.currPage])
+  console.log(datas)
   return (
     <>
       {datas.movies.length === 0 ? <Temp>{'검색 결과가 없습니다.'}</Temp> : ''}
@@ -151,12 +153,12 @@ function Content({ datas }: any) {
                       )
                     }
                   />
-                  <Detail>
+
+                  <Title>
                     {value.title}
                     <br />
-                    {`평점: ${value.vote_average}`}
-                  </Detail>
-                  <Title>{value.title}</Title>
+                    <p>{`평점: ${value.vote_average}`}</p>
+                  </Title>
                 </MovieBox>
               </Wrapper>
             )

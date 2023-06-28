@@ -49,10 +49,10 @@ export default function Title({ title }: TitleType) {
   const inputRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
   const onSearch = () => {
-    if (title === '/past') {
+    if (title === '/future') {
       searchKeyword
-        ? router.push(`/past?currPage=1&keyword=${searchKeyword}`)
-        : router.push('/past?currPage=1')
+        ? router.push(`/future?currPage=1&keyword=${searchKeyword}`)
+        : router.push('/future?currPage=1')
     } else {
       searchKeyword
         ? router.push(`/mainpage?currPage=1&keyword=${searchKeyword}`)
@@ -70,7 +70,7 @@ export default function Title({ title }: TitleType) {
 
   return (
     <Header>
-      <p>{title === '/past' ? '지난 상영작' : '현재 상영작'}</p>
+      <p>{title === '/future' ? '상영 예정작' : '현재 상영작'}</p>
       <SearchBox>
         <Search
           onKeyPress={handleKeyPress}
