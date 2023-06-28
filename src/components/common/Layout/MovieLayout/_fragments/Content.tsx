@@ -130,7 +130,6 @@ function Content({ datas }: any) {
   useEffect(() => {
     setPage(parseInt(datas.currPage))
   }, [datas.currPage])
-  console.log(datas)
   return (
     <>
       {datas.movies.length === 0 ? <Temp>{'검색 결과가 없습니다.'}</Temp> : ''}

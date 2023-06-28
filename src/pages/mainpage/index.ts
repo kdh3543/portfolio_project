@@ -25,13 +25,11 @@ export async function getServerSideProps(context: PropsType) {
     `${CONFIG.API_URL}/movie/now_playing?api_key=${CONFIG.API_KEY}&language=ko-KR&include_adult=false&page=${currPage}`
     // 'https://api.themoviedb.org/3/movie/now_playing?api_key=9740c08b22ca234bfadcbd2677db6a38&language=ko-KR&include_adult=false&page=1'
   )
-  console.log(CONFIG.API_URL)
   let data = result.data
   let datas = {
     movies: data.results,
     currPage,
   }
-  console.log(datas)
   if (keyword) {
     data = data.results.filter((val: Movie) => val.title.includes(keyword))
     datas.movies = data

@@ -2,6 +2,7 @@ import { Footer } from '@/components/common/Layout/Footer/Footer'
 import Header from '@/components/common/Layout/Header/Header'
 import MovieLayout from '@/components/common/Layout/MovieLayout/MovieLayout'
 import { MoviesProps } from '@/components/common/Layout/MovieLayout/_fragments/Movie.data'
+import DetailModal from '@/components/common/Modal/DetailModal'
 import useCognitoUser from '@/components/hooks/useCognitoUser'
 import { MY_IMAGE } from '@/generated/path/images'
 import Head from 'next/head'
@@ -26,6 +27,7 @@ function FuturePage({ datas }: MoviesProps) {
       <Header />
       <MovieLayout datas={datas} />
       <Footer />
+      <DetailModal />
     </>
   )
 }
