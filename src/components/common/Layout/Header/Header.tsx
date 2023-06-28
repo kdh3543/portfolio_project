@@ -115,7 +115,7 @@ export default function Header() {
   }
 
   const toMemberInforPage = () => {
-    router.push('/inforpage')
+    // router.push('/inforpage')
   }
 
   useEffect(() => {
