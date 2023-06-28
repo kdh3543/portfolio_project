@@ -53,13 +53,7 @@
   
     - useCognitoUser로 hook을 생성하여 CognitoUser에 회원가입 데이터를 입력하여 회원가입 구현
 
-    ![image](https://user-images.githubusercontent.com/91539013/232319590-3a0cc9cc-552a-435b-9878-b381b03a54ec.png)
-
-    - amazon-cognito-identity-js에 있는 authenticateUser에 로그인 데이터를 넣어 일치하는지 확인 후 성공시 mainpage로 이동
-    
-    ![image](https://user-images.githubusercontent.com/91539013/232319838-0355d91c-afce-4537-aa62-4ba79bbdacd6.png)
-
-2. 영화 리스트(현재 상영작 / 지난 상영작)
+    ![i작)
 
 ![image](https://user-images.githubusercontent.com/91539013/232229036-fb4cb166-6982-448a-9f52-0a40ba321624.png)
 
