@@ -3,10 +3,13 @@ import Header from '@/components/common/Layout/Header/Header'
 import { MY_IMAGE } from '@/generated/path/images'
 import Head from 'next/head'
 import styled from 'styled-components'
+import { INFO_TITLE } from './_fragments/memberInfo.data'
+import { getLocalStorage } from '@/utils/localstorage/localstorage'
+import { useEffect, useState } from 'react'
 
 const Container = styled.div`
   min-height: 800px;
-  width: 80%;
+  width: 60%;
   margin: auto;
   @media screen and (max-width: 1024px) {
     width: 100%;
@@ -54,8 +57,12 @@ const InforTitle = styled.div`
   font-weight: bolder;
 `
 
-const InforContent = styled.div`
+const InforContent = styled.input`
   width: 70%;
+  margin: 0px 10px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid gray;
 `
 
 const Button = styled.button`
@@ -70,6 +77,27 @@ const Button = styled.button`
 `
 
 export default function InforPage() {
+  const [email, setEmail] = useState<any>(null)
+  const [updateData, setUpdateData] = useState({
+    email: '',
+    pw: '',
+    rePw: '',
+  })
+
+  useEffect(() => {
+    setEmail(getLocalStorage())
+  }, [getLocalStorage()])
+
+  const onUpdate = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value, name } = e.target
+    setUpdateData((prev) => ({ ...prev, [name]: value }))
+  }
+
+  const changeUserInfo = () => {
+    const data = updateData
+    if (!updateData.email) data.email = email
+    console.log(updateData)
+  }
   return (
     <>
       <Head>
@@ -83,24 +111,19 @@ export default function InforPage() {
         <MainTitle>{'회원정보'}</MainTitle>
         <MainBox>
           <InforContainer>
-            <InforBox>
-              <InforTitle>이메일:</InforTitle>
-              <InforContent>test1234@naver.com</InforContent>
-            </InforBox>
-            <InforBox>
-              <InforTitle>비밀번호:</InforTitle>
-              <InforContent>content</InforContent>
-            </InforBox>
-            <InforBox>
-              <InforTitle>비밀번호 확인:</InforTitle>
-              <InforContent>content</InforContent>
-            </InforBox>
-            <InforBox>
-              <InforTitle>title</InforTitle>
-              <InforContent>content</InforContent>
-            </InforBox>
+            {INFO_TITLE.map((item) => (
+              <InforBox key={item.id}>
+                <InforTitle>{`${item.text}:`}</InforTitle>
+                <InforContent
+                  defaultValue={item.text === '이메일' ? email : ''}
+                  type={item.text === '이메일' ? 'text' : 'password'}
+                  name={item.name}
+                  onChange={(e) => onUpdate(e)}
+                />
+              </InforBox>
+            ))}
           </InforContainer>
-          <Button>{'변경'}</Button>
+          <Button onClick={changeUserInfo}>{'변경'}</Button>
         </MainBox>
       </Container>
       <Footer />

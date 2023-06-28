@@ -149,6 +149,7 @@ function LoginPage() {
   }
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    console.log(loginData)
     if (e.key === 'Enter') {
       onLogin()
     }
