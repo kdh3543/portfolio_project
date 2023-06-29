@@ -13,12 +13,6 @@ const Title = styled.div`
   font-size: 20px;
 `
 
-const Content = styled.div`
-  font-size: 15px;
-  margin-top: 10px;
-  line-height: 25px;
-`
-
 const Social = styled.div`
   display: flex;
   margin-top: 50px;
@@ -36,22 +30,15 @@ const Text = styled.p`
   font-size: 18px;
 `
 
-const Images = styled.img``
-
 export function Footer() {
   return (
     <Bottom>
       <Title>{'김동현의 Movie Zone (M.Z)'}</Title>
-      {/* <Content>
-        {"연락처: 010-2252-9969"}
-        <br />
-        {"주소: 서울특별시 갈현동 456-18 드림빌 602호"}
-      </Content> */}
+
       <Social>
         <Text>{'made by 북한코뿔소'}</Text>
         {SOCIAL_MENU.map((item) => {
           return (
-            // eslint-disable-next-line @next/next/no-img-element
             <img
               key={item.id}
               src={item.image}

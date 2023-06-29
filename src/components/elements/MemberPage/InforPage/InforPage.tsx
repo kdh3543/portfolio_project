@@ -112,15 +112,22 @@ export default function InforPage() {
         <MainBox>
           <InforContainer>
             {INFO_TITLE.map((item) => (
-              <InforBox key={item.id}>
-                <InforTitle>{`${item.text}:`}</InforTitle>
-                <InforContent
-                  defaultValue={item.text === '이메일' ? email : ''}
-                  type={item.text === '이메일' ? 'text' : 'password'}
-                  name={item.name}
-                  onChange={(e) => onUpdate(e)}
-                />
-              </InforBox>
+              <>
+                <InforBox key={item.id}>
+                  <InforTitle>{`${item.text}:`}</InforTitle>
+                  <InforContent
+                    defaultValue={item.name === 'email' ? email : ''}
+                    type={item.name === 'email' ? 'text' : 'password'}
+                    name={item.name}
+                    onChange={(e) => onUpdate(e)}
+                    placeholder={
+                      item.name === 'pw'
+                        ? '비밀번호(영어 소문자,숫자 혼합 8 ~ 17자)'
+                        : ''
+                    }
+                  />
+                </InforBox>
+              </>
             ))}
           </InforContainer>
           <Button onClick={changeUserInfo}>{'변경'}</Button>
